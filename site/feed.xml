@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>x-algorithm changelog (unofficial)</title>
+  <subtitle>Plain-English developer notes for every update to X's open-source recommendation algorithm. Unofficial; not affiliated with X Corp. or xAI.</subtitle>
+  <link rel="self" type="application/atom+xml" href="https://fitzyracing1.github.io/x-algorithm-changelog/feed.xml"/>
+  <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/"/>
+  <link rel="related" href="https://github.com/xai-org/x-algorithm"/>
+  <id>https://fitzyracing1.github.io/x-algorithm-changelog/</id>
+  <updated>2026-10-09T05:42:57Z</updated>
+  <author><name>x-algorithm-changelog contributors</name></author>
+  <generator>x-algorithm-changelog</generator>
+  <entry>
+    <title>Oct 9, 2026 — Code changes in phoenix/, grox/ and home-mixer/ (16 files).</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/cb45b55.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/cb45b5501423126adfc508052116c2d67c0e3fec"/>
+    <id>tag:fitzyracing1.github.io,2026:cb45b5501423126adfc508052116c2d67c0e3fec</id>
+    <published>2026-10-09T05:42:57Z</published>
+    <updated>2026-10-09T05:42:57Z</updated>
+    <summary>Code changes in phoenix/, grox/ and home-mixer/ (16 files).</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Other literal values changed in code: &lt;code&gt;bs_per_device&lt;/code&gt; 256→512 (xrecsys.py) and &lt;code&gt;ep&lt;/code&gt; 256→128 (xrecsys.py).&lt;/li&gt;&lt;li&gt;Proto/Thrift schema: 2 fields added (e.g. &lt;code&gt;PredictNextActionsRequest.feed_cursor_direction&lt;/code&gt; and &lt;code&gt;PredictNextActionsRequest.feed_request_context&lt;/code&gt;).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;phoenix/&lt;/code&gt; (+1,215/−217), &lt;code&gt;grox/&lt;/code&gt; (+12/−0) and &lt;code&gt;home-mixer/&lt;/code&gt; (+1/−1).&lt;/li&gt;&lt;li&gt;1 file changed only in formatting, comments or sync metadata.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/cb45b5501423126adfc508052116c2d67c0e3fec"&gt;Upstream commit cb45b55&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/cb45b55.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Oct 8, 2026 — Vertical video carousel added to For You (off by default)</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/35650fb.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/35650fb89f3b14dc6234312535f642779d891d88"/>
+    <id>tag:fitzyracing1.github.io,2026:35650fb89f3b14dc6234312535f642779d891d88</id>
+    <published>2026-10-08T05:09:20Z</published>
+    <updated>2026-10-08T05:09:20Z</updated>
+    <summary>Vertical video carousel added to For You (off by default)</summary>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;New flag &lt;code&gt;EnableVideoCarousel&lt;/code&gt; (default &lt;strong&gt;off&lt;/strong&gt;), plus &lt;code&gt;VideoCarouselPosition&lt;/code&gt; = 6 and &lt;code&gt;VideoCarouselFatigueMinutes&lt;/code&gt; = 60.&lt;/li&gt;
+&lt;li&gt;When enabled on a For You request, the pipeline sets aside up to &lt;code&gt;VIDEO_CAROUSEL_EXTRA_CANDIDATES&lt;/code&gt; = 30 extra video candidates (top by predicted video-open). The new &lt;code&gt;VideoCarouselFilter&lt;/code&gt; and &lt;code&gt;util/video_carousel.rs&lt;/code&gt; then pick 3–5 non-reply videos whose aspect ratio is below 1.0 (the code&amp;#x27;s &lt;code&gt;is_vertical&lt;/code&gt; check), ordered by predicted video-open probability. No carousel is shown if fewer than 3 qualify.&lt;/li&gt;
+&lt;li&gt;New &lt;code&gt;video_aspect_ratio_hydrator&lt;/code&gt; supplies the aspect ratio. &lt;code&gt;FEED_MODULE_SLOTS&lt;/code&gt; &lt;code&gt;4&lt;/code&gt; → &lt;code&gt;5&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;New &lt;code&gt;ads/drops.rs&lt;/code&gt;. Large Phoenix training/model changes in the same sync.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/35650fb89f3b14dc6234312535f642779d891d88"&gt;Upstream commit 35650fb&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/35650fb.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Oct 7, 2026 — Popular-posts source turned on; post-unexplored weight 0.02 → 0.015</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/78460ca.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/78460ca8b65c57ddd3a05f9217c8aaeba214b628"/>
+    <id>tag:fitzyracing1.github.io,2026:78460ca8b65c57ddd3a05f9217c8aaeba214b628</id>
+    <published>2026-10-07T03:05:56Z</published>
+    <updated>2026-10-07T03:05:56Z</updated>
+    <summary>Popular-posts source turned on; post-unexplored weight 0.02 → 0.015</summary>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;EnablePopularPostsSource&lt;/code&gt; now &lt;strong&gt;on by default&lt;/strong&gt;. The README adds it as a third out-of-network source next to Phoenix retrieval and SimClusters: &amp;quot;a shared list of popular recent posts, initially from the most-followed active accounts.&amp;quot;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PostUnexploredWeight&lt;/code&gt; &lt;code&gt;0.02&lt;/code&gt; → &lt;code&gt;0.015&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/78460ca8b65c57ddd3a05f9217c8aaeba214b628"&gt;Upstream commit 78460ca&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/78460ca.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Oct 6, 2026 — New zero-weighted heads (video continuation, profile visit time); popular posts precomputed</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/e62790c.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/e62790c99484b51424c2eccc488ed4e7517e8778"/>
+    <id>tag:fitzyracing1.github.io,2026:e62790c99484b51424c2eccc488ed4e7517e8778</id>
+    <published>2026-10-06T04:59:30Z</published>
+    <updated>2026-10-06T04:59:30Z</updated>
+    <summary>New zero-weighted heads (video continuation, profile visit time); popular posts precomputed</summary>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;New ranking weights, all at &lt;code&gt;0.0&lt;/code&gt; for now:&lt;/strong&gt; &lt;code&gt;VideoContinuationWeight&lt;/code&gt;, &lt;code&gt;UserVideoContinuationWeight&lt;/code&gt; and &lt;code&gt;ProfileVisitSecsWeight&lt;/code&gt;, defined in &lt;code&gt;vm-ranker/params.rs&lt;/code&gt;. The shared &lt;code&gt;xai-value-model&lt;/code&gt; crate gets matching heads (its weight list grows from 25 to 28 entries). Home-mixer&amp;#x27;s own &lt;code&gt;value_model.rs&lt;/code&gt; hard-codes the two video-continuation weights to &lt;code&gt;0.0&lt;/code&gt;, so for now these heads don&amp;#x27;t change scores.&lt;/li&gt;
+&lt;li&gt;New flag &lt;code&gt;PostUnexploredIncludeOutOfNetwork&lt;/code&gt; (&lt;code&gt;vm-ranker/params.rs&lt;/code&gt;, default off). Without it, the value model&amp;#x27;s post-unexplored bonus applies only to in-network candidates.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PopularPostsSource&lt;/code&gt; now reads from a precomputed &lt;code&gt;PopularPostsCache&lt;/code&gt; (new &lt;code&gt;util/popular_posts.rs&lt;/code&gt;, filled by new &lt;code&gt;popular_posts_job.rs&lt;/code&gt; / &lt;code&gt;popular_authors_job.rs&lt;/code&gt;) instead of querying Thunder on each request. &lt;code&gt;PopularPostsTopAuthors&lt;/code&gt;, &lt;code&gt;PopularPostsMaxPerAuthor&lt;/code&gt; and &lt;code&gt;PopularPostsMaxRepliesRepostsPerAuthor&lt;/code&gt; leave &lt;code&gt;param.rs&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;New flags &lt;code&gt;EnableUnderTheHood&lt;/code&gt; and &lt;code&gt;EnableHomeExcursionScores&lt;/code&gt; (both off).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RetrievalCandidatesKafkaMaxCandidates&lt;/code&gt; &lt;code&gt;200&lt;/code&gt; → &lt;code&gt;100000&lt;/code&gt;. &lt;code&gt;VMRankerClusterId&lt;/code&gt; &lt;code&gt;&amp;quot;Experiment6&amp;quot;&lt;/code&gt; → &lt;code&gt;&amp;quot;Experiment1&amp;quot;&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/e62790c99484b51424c2eccc488ed4e7517e8778"&gt;Upstream commit e62790c&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/e62790c.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Oct 3, 2026 — Popular-posts candidate source added (off by default); brand-safety verdict v2 back on</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/b412112.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/b412112d03f27acbfd668e0cc040abcafa1080c1"/>
+    <id>tag:fitzyracing1.github.io,2026:b412112d03f27acbfd668e0cc040abcafa1080c1</id>
+    <published>2026-10-03T03:26:56Z</published>
+    <updated>2026-10-03T03:26:56Z</updated>
+    <summary>Popular-posts candidate source added (off by default); brand-safety verdict v2 back on</summary>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;New candidate source &lt;code&gt;PopularPostsSource&lt;/code&gt;&lt;/strong&gt; (&lt;code&gt;home-mixer/sources/popular_posts_source.rs&lt;/code&gt;), behind &lt;code&gt;EnablePopularPostsSource&lt;/code&gt; (default off). It fetches recent posts by popular authors (&lt;code&gt;PopularPostsTopAuthors&lt;/code&gt; = 1000) from Thunder, capped at &lt;code&gt;PopularPostsMaxResults&lt;/code&gt; = 500 and &lt;code&gt;PopularPostsMaxPerAuthor&lt;/code&gt; = 3, with no replies or reposts (&lt;code&gt;PopularPostsMaxRepliesRepostsPerAuthor&lt;/code&gt; = 0).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;EnableAdsBrandSafetyVerdictV2&lt;/code&gt; goes back to &lt;strong&gt;on&lt;/strong&gt; (it was switched off on Sep 16).&lt;/li&gt;
+&lt;li&gt;New flags/params, all off or zero by default: &lt;code&gt;EnablePhoenixOonReplies&lt;/code&gt;, &lt;code&gt;AuthorExplorationBonus&lt;/code&gt; = 0.0, &lt;code&gt;EnableAdsAuthorBrandSafetyFallback&lt;/code&gt;, &lt;code&gt;VMRankerSendPacingInputs&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;New &lt;code&gt;phoenix_reply_ancestors_hydrator&lt;/code&gt; and a &lt;code&gt;served_event_kafka&lt;/code&gt; side effect.&lt;/li&gt;
+&lt;li&gt;The README&amp;#x27;s Brazil-filter note now reads &amp;quot;Account list updated September 29, 2026.&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/b412112d03f27acbfd668e0cc040abcafa1080c1"&gt;Upstream commit b412112&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/b412112.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Oct 2, 2026 — New semantic-ID candidate source (off by default)</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/76843a5.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/76843a5eea278ced444b21372d4e6d6909f5c35e"/>
+    <id>tag:fitzyracing1.github.io,2026:76843a5eea278ced444b21372d4e6d6909f5c35e</id>
+    <published>2026-10-02T02:06:55Z</published>
+    <updated>2026-10-02T02:06:55Z</updated>
+    <summary>New semantic-ID candidate source (off by default)</summary>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;New candidate source &lt;code&gt;SidSource&lt;/code&gt;&lt;/strong&gt; (&lt;code&gt;home-mixer/sources/sid_source.rs&lt;/code&gt;) that retrieves posts through a new &lt;code&gt;SidRetrievalClient&lt;/code&gt; (seeded with up to &lt;code&gt;SidSourceMaxSeeds&lt;/code&gt; post IDs taken from the viewer&amp;#x27;s signals via &lt;code&gt;post_signal_ids&lt;/code&gt;). It is gated by &lt;code&gt;EnableSidSource&lt;/code&gt; (default off) with &lt;code&gt;SidSourceMaxResults&lt;/code&gt; = 800, &lt;code&gt;SidSourceMaxSeeds&lt;/code&gt; = 50, &lt;code&gt;SidSourceMaxPerSeed&lt;/code&gt; = 100 and &lt;code&gt;SidSourceMinPrefixDepth&lt;/code&gt; = 3.&lt;/li&gt;
+&lt;li&gt;Removes the &lt;code&gt;TestBoost&lt;/code&gt; and &lt;code&gt;TestCap&lt;/code&gt; params.&lt;/li&gt;
+&lt;li&gt;Many proto/schema additions and Phoenix changes in the same sync. See the full analysis.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/76843a5eea278ced444b21372d4e6d6909f5c35e"&gt;Upstream commit 76843a5&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/76843a5.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Oct 1, 2026 — 1 new config parameter and code changes in visibility-filtering/, abuse-enforcement-service/ and phoenix-rankall/.</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/b79b947.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/b79b947ce9283c786822274ef8fe208c33c585b2"/>
+    <id>tag:fitzyracing1.github.io,2026:b79b947ce9283c786822274ef8fe208c33c585b2</id>
+    <published>2026-10-01T02:13:55Z</published>
+    <updated>2026-10-01T02:13:55Z</updated>
+    <summary>1 new config parameter and code changes in visibility-filtering/, abuse-enforcement-service/ and phoenix-rankall/.</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Added 1 config parameter: &lt;code&gt;FeedSurveyFatigueMinutes&lt;/code&gt; = &lt;code&gt;1440&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Removed 1 config parameter: &lt;code&gt;FeedSurveyFatigueHours&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Other literal values changed in code: &lt;code&gt;(2, failed()),&lt;/code&gt; 1→2 (fallback_cache.rs), &lt;code&gt;(1, failed()),&lt;/code&gt; 2→1 (fallback_cache.rs) and &lt;code&gt;fn verdict_cases() -&amp;gt; [(Verdict, Projected); 15] {&lt;/code&gt; 14→15 (treatment.rs).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;visibility-filtering/&lt;/code&gt; (+1,566/−300), &lt;code&gt;abuse-enforcement-service/&lt;/code&gt; (+713/−150), &lt;code&gt;phoenix-rankall/&lt;/code&gt; (+139/−33), &lt;code&gt;phoenix/&lt;/code&gt; (+45/−11) and &lt;code&gt;home-mixer/&lt;/code&gt; (+9/−11).&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/b79b947ce9283c786822274ef8fe208c33c585b2"&gt;Upstream commit b79b947&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/b79b947.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 30, 2026 — Cold-start boost for small accounts retuned and Thompson sampling enabled</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/77d431a.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/77d431aabf409ca1c1eed9bec7e2183f7c914e23"/>
+    <id>tag:fitzyracing1.github.io,2026:77d431aabf409ca1c1eed9bec7e2183f7c914e23</id>
+    <published>2026-09-30T03:53:42Z</published>
+    <updated>2026-09-30T03:53:42Z</updated>
+    <summary>Cold-start boost for small accounts retuned and Thompson sampling enabled</summary>
+    <content type="html">&lt;p&gt;This sync changes the defaults of the &lt;strong&gt;author cold-start&lt;/strong&gt; mechanism (&lt;code&gt;home-mixer/scorers/author_cold_start.rs&lt;/code&gt;). Per request, it picks one eligible fresh post from a smaller account and raises its score to whatever score sits at a fixed rank, which is index 15 given &lt;code&gt;ColdStartSlotMin&lt;/code&gt; = 15 and &lt;code&gt;ColdStartSlotMax&lt;/code&gt; = 16.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ColdStartFollowerCap&lt;/code&gt; &lt;code&gt;1000&lt;/code&gt; → &lt;code&gt;50000&lt;/code&gt;: authors with up to 50k followers are now eligible.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ColdStartImpressionThreshold&lt;/code&gt; &lt;code&gt;1000&lt;/code&gt; → &lt;code&gt;200&lt;/code&gt;: the post must have fewer than 200 Home impressions.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ColdStartMaxPostAgeSecs&lt;/code&gt; &lt;code&gt;172800&lt;/code&gt; → &lt;code&gt;7200&lt;/code&gt;: the post must be under 2 hours old (was 48h).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;LowImpressionsMaxPositionRatio&lt;/code&gt; &lt;code&gt;0.85&lt;/code&gt; → &lt;code&gt;0.97&lt;/code&gt;: candidates from deeper in the ranked list can qualify.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;EnableColdStartThompsonSampling&lt;/code&gt; now &lt;strong&gt;on by default&lt;/strong&gt;. Instead of taking the highest-scored eligible post, the scorer samples a Beta(0.75 + likes, 49.25 + impressions − likes) reward per post, keeps the top &lt;code&gt;ColdStartTsTopK&lt;/code&gt; (2), and boosts the higher-scored of those.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PhoenixColdStartMaxResults&lt;/code&gt; &lt;code&gt;0&lt;/code&gt; → &lt;code&gt;200&lt;/code&gt;: the Phoenix cold-start retrieval path is switched on.&lt;/li&gt;
+&lt;li&gt;The Brazil election list goes from 2,786 to 2,795 accounts.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/77d431aabf409ca1c1eed9bec7e2183f7c914e23"&gt;Upstream commit 77d431a&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/77d431a.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 29, 2026 — Ranking weights: click 0.4 → 0.3, click-dwell 0 → 0.4, not-interested −43.2 → −47.52</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/a707cc2.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/a707cc27ba36d3fa79450c9cffcc48a82d080b02"/>
+    <id>tag:fitzyracing1.github.io,2026:a707cc27ba36d3fa79450c9cffcc48a82d080b02</id>
+    <published>2026-09-29T03:06:30Z</published>
+    <updated>2026-09-29T03:06:30Z</updated>
+    <summary>Ranking weights: click 0.4 → 0.3, click-dwell 0 → 0.4, not-interested −43.2 → −47.52</summary>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Weight changes&lt;/strong&gt;, made identically in &lt;code&gt;home-mixer/params/param.rs&lt;/code&gt; and &lt;code&gt;vm-ranker/params.rs&lt;/code&gt;: &lt;code&gt;ClickWeight&lt;/code&gt; &lt;code&gt;0.4&lt;/code&gt; → &lt;code&gt;0.3&lt;/code&gt;. &lt;code&gt;ContClickDwellTimeWeight&lt;/code&gt; &lt;code&gt;0.0&lt;/code&gt; → &lt;code&gt;0.4&lt;/code&gt;, so predicted time spent after clicking into a post now counts. &lt;code&gt;NotInterestedWeight&lt;/code&gt; &lt;code&gt;-43.2&lt;/code&gt; → &lt;code&gt;-47.52&lt;/code&gt;, a 10% larger penalty.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cold-start holdout:&lt;/strong&gt; in &lt;code&gt;author_cold_start.rs&lt;/code&gt; the MoE &amp;quot;ranking policy&amp;quot; that zeroed arm-gated retrieval candidates for non-treatment viewers is removed, along with the &lt;code&gt;author_policy_zeroed&lt;/code&gt; field. Holdout viewers no longer exclude arm-gated retrieval candidates from cold-start eligibility.&lt;/li&gt;
+&lt;li&gt;New flag &lt;code&gt;PhoenixRetrievalExcludeSeenPosts&lt;/code&gt; (default off). When on, Phoenix retrieval is sent the viewer&amp;#x27;s seen/served post IDs and impression bloom filters so it can skip posts already shown.&lt;/li&gt;
+&lt;li&gt;The ads request now forwards the client&amp;#x27;s seen post IDs (&lt;code&gt;client_seen_post_ids&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;Removed flag: &lt;code&gt;UseEngagementCounterViewCountForImpressionBoost&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;README: documents &lt;code&gt;abuse-ledger-service/&lt;/code&gt;. When an enforcement is overturned on appeal, it is not re-applied for a fixed period.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/a707cc27ba36d3fa79450c9cffcc48a82d080b02"&gt;Upstream commit a707cc2&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/a707cc2.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 26, 2026 — Removed candidate hydrators safety_label_hydrator and tes_hydrator and other changes.</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/4c5cfe8.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/4c5cfe8f07f1c76d4f04277e803f20e6039f5191"/>
+    <id>tag:fitzyracing1.github.io,2026:4c5cfe8f07f1c76d4f04277e803f20e6039f5191</id>
+    <published>2026-09-26T03:39:02Z</published>
+    <updated>2026-09-26T03:39:02Z</updated>
+    <summary>Removed candidate hydrators safety_label_hydrator and tes_hydrator and other changes.</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Removed candidate hydrators: &lt;code&gt;safety_label_hydrator&lt;/code&gt; and &lt;code&gt;tes_hydrator&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Renamed: &lt;code&gt;gizmoduck_hydrator&lt;/code&gt; → &lt;code&gt;author&lt;/code&gt; and &lt;code&gt;viewer_hydrator&lt;/code&gt; → &lt;code&gt;viewer&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Constants changed: &lt;code&gt;GEMMA_REPLY_SPAM_MIN_FOLLOWERS&lt;/code&gt; &lt;code&gt;150_000&lt;/code&gt; → &lt;code&gt;125_000&lt;/code&gt; (constants.py) and &lt;code&gt;FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION&lt;/code&gt; &lt;code&gt;100_000&lt;/code&gt; → &lt;code&gt;125_000&lt;/code&gt; (task_filter.py).&lt;/li&gt;&lt;li&gt;Other literal values changed in code: &lt;code&gt;rows&lt;/code&gt; 14→15 (execute.rs) and &lt;code&gt;timeline_home_hydration&lt;/code&gt; 10→11 (plan.rs).&lt;/li&gt;&lt;li&gt;Proto/Thrift schema: 18 fields added (e.g. &lt;code&gt;PostActionScores.action_indices&lt;/code&gt;, &lt;code&gt;PostActionScores.found&lt;/code&gt;, &lt;code&gt;PostActionScores.num_posts&lt;/code&gt;, &lt;code&gt;PostActionScores.post_action_masks&lt;/code&gt; and 14 more).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;abuse-enforcement-service/&lt;/code&gt; (+6,060/−7), &lt;code&gt;visibility-filtering/&lt;/code&gt; (+2,177/−1,937), &lt;code&gt;phoenix/&lt;/code&gt; (+811/−689), &lt;code&gt;home-mixer/&lt;/code&gt; (+62/−8) and &lt;code&gt;grox/&lt;/code&gt; (+20/−11).&lt;/li&gt;&lt;li&gt;1 file changed only in formatting, comments or sync metadata.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/4c5cfe8f07f1c76d4f04277e803f20e6039f5191"&gt;Upstream commit 4c5cfe8&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/4c5cfe8.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 25, 2026 — Removed candidate hydrators conversation_control_hydrator, exclusive_content_hydrator and socialgraph_hydrator and other changes.</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/bf7db1b.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/bf7db1becb6590152fba79b8c3bf0555752f7b14"/>
+    <id>tag:fitzyracing1.github.io,2026:bf7db1becb6590152fba79b8c3bf0555752f7b14</id>
+    <published>2026-09-25T01:56:24Z</published>
+    <updated>2026-09-25T01:56:24Z</updated>
+    <summary>Removed candidate hydrators conversation_control_hydrator, exclusive_content_hydrator and socialgraph_hydrator and other changes.</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Removed candidate hydrators: &lt;code&gt;conversation_control_hydrator&lt;/code&gt;, &lt;code&gt;exclusive_content_hydrator&lt;/code&gt; and &lt;code&gt;socialgraph_hydrator&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Constants changed: &lt;code&gt;KEY_FRAMES_UNCONDITIONAL_FAV&lt;/code&gt; &lt;code&gt;512&lt;/code&gt; → &lt;code&gt;1024&lt;/code&gt; (constants.py).&lt;/li&gt;&lt;li&gt;Other literal values changed in code: &lt;code&gt;TIMELINE_HOME_RECOMMENDATION_ONLY_RULES&lt;/code&gt; 5→9 (registry.rs).&lt;/li&gt;&lt;li&gt;Static list &lt;code&gt;BRAZIL_2026_ELECTION_USER_IDS&lt;/code&gt; (brazil_2026_election_filter.rs) grew from 2,776 to 2,786 entries (per its in-file test assertion).&lt;/li&gt;&lt;li&gt;Proto/Thrift schema: 1 field added (e.g. &lt;code&gt;AdInfo.unified_card_type&lt;/code&gt;).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;visibility-filtering/&lt;/code&gt; (+6,329/−5,545), &lt;code&gt;grox/&lt;/code&gt; (+534/−153), &lt;code&gt;under-the-hood/&lt;/code&gt; (+616/−0), &lt;code&gt;phoenix/&lt;/code&gt; (+256/−52) and &lt;code&gt;home-mixer/&lt;/code&gt; (+23/−3).&lt;/li&gt;&lt;li&gt;1 file changed only in formatting, comments or sync metadata.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/bf7db1becb6590152fba79b8c3bf0555752f7b14"&gt;Upstream commit bf7db1b&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/bf7db1b.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 24, 2026 — Ranking scorer rewritten as a shared xai-value-model crate</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/44d37eb.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/44d37ebf87f2185b949cd37b710d410c2a77d21f"/>
+    <id>tag:fitzyracing1.github.io,2026:44d37ebf87f2185b949cd37b710d410c2a77d21f</id>
+    <published>2026-09-24T01:53:14Z</published>
+    <updated>2026-09-24T01:53:14Z</updated>
+    <summary>Ranking scorer rewritten as a shared xai-value-model crate</summary>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;home-mixer/scorers/ranking_scorer.rs&lt;/code&gt; (1,255 lines) is deleted.&lt;/strong&gt; It&amp;#x27;s replaced by a 114-line &lt;code&gt;home-mixer/scorers/value_model.rs&lt;/code&gt; that maps feature-switch params into a &lt;code&gt;ValueModelWeights&lt;/code&gt; struct and calls &lt;code&gt;fuse_heads&lt;/code&gt; from a new top-level crate, &lt;code&gt;xai-value-model/&lt;/code&gt; (&lt;code&gt;scoring.rs&lt;/code&gt;, &lt;code&gt;weights.rs&lt;/code&gt;, &lt;code&gt;inputs.rs&lt;/code&gt;, …).&lt;/li&gt;
+&lt;li&gt;In this version, home-mixer&amp;#x27;s &lt;code&gt;weights_for&lt;/code&gt; hard-codes &lt;code&gt;enable_author_diversity: false&lt;/code&gt;, &lt;code&gt;oon_rescore_in_network_replies_retweets: false&lt;/code&gt; and &lt;code&gt;multiplier_pre_offset: false&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;22 params leave &lt;code&gt;home-mixer/params/param.rs&lt;/code&gt;. Eleven of them (author diversity, the OON weight factors, &lt;code&gt;MultiplierPreOffset&lt;/code&gt;, &lt;code&gt;WeightPerturbation*&lt;/code&gt;, …) are still defined in &lt;code&gt;vm-ranker/params.rs&lt;/code&gt;. The other eleven aren&amp;#x27;t defined as params anywhere else, including &lt;code&gt;EnableVMRanker&lt;/code&gt;, &lt;code&gt;CachedPostsReuseWeightedScore&lt;/code&gt;, &lt;code&gt;EnableMultiplicativePostUnexplored&lt;/code&gt; and the &lt;code&gt;VMRankerDpp*&lt;/code&gt; settings.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;VMRankerClusterId&lt;/code&gt; changes from &lt;code&gt;&amp;quot;Experiment3&amp;quot;&lt;/code&gt; to &lt;code&gt;&amp;quot;Experiment6&amp;quot;&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/44d37ebf87f2185b949cd37b710d410c2a77d21f"&gt;Upstream commit 44d37eb&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/44d37eb.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 23, 2026 — vm-ranker can now compute the value model itself (off by default)</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/1b3fec2.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/1b3fec20bc3fd9879bc3e9f3d9c42753cdc3fede"/>
+    <id>tag:fitzyracing1.github.io,2026:1b3fec20bc3fd9879bc3e9f3d9c42753cdc3fede</id>
+    <published>2026-09-23T02:19:21Z</published>
+    <updated>2026-09-23T02:19:21Z</updated>
+    <summary>vm-ranker can now compute the value model itself (off by default)</summary>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;vm-ranker/&lt;/code&gt; gets its own &lt;code&gt;params.rs&lt;/code&gt;&lt;/strong&gt; with 44 &lt;code&gt;param!&lt;/code&gt; defaults. These include 27 ranking weights that mirror home-mixer&amp;#x27;s names, keys and current defaults (all of home-mixer&amp;#x27;s weights except &lt;code&gt;ContActiveSecs5mResidualNormWeight&lt;/code&gt;; e.g. &lt;code&gt;FavoriteWeight&lt;/code&gt; = 0.5, &lt;code&gt;ReplyWeight&lt;/code&gt; = 5.0), plus DPP settings (&lt;code&gt;DppEnabled&lt;/code&gt; on, &lt;code&gt;DppTheta&lt;/code&gt; = 0.65, &lt;code&gt;DppMaxSelectedRank&lt;/code&gt; = 150) and author-diversity settings (&lt;code&gt;EnableAuthorDiversity&lt;/code&gt; on, &lt;code&gt;AuthorDiversityDecay&lt;/code&gt; = 0.5, &lt;code&gt;AuthorDiversityFloor&lt;/code&gt; = 0.25).&lt;/li&gt;
+&lt;li&gt;New &lt;code&gt;vm-ranker/scoring/value_model.rs&lt;/code&gt; builds value-model weights from those params (&lt;code&gt;weights_from_params&lt;/code&gt;). It is gated by &lt;code&gt;ComputeValueModel&lt;/code&gt;, which defaults to &lt;strong&gt;off&lt;/strong&gt;. New &lt;code&gt;ranking_config.rs&lt;/code&gt; and &lt;code&gt;config_sync.rs&lt;/code&gt; files are added alongside.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Home-mixer side:&lt;/strong&gt; new &lt;code&gt;vm_ranker_debias_payload.rs&lt;/code&gt; and a &lt;code&gt;VMRankerSendDebiasInputs&lt;/code&gt; flag (off). &lt;code&gt;PhoenixMOEMaxResults&lt;/code&gt; &lt;code&gt;200&lt;/code&gt; → &lt;code&gt;0&lt;/code&gt; and &lt;code&gt;PhoenixMoeColdStartMaxResults&lt;/code&gt; &lt;code&gt;0&lt;/code&gt; → &lt;code&gt;200&lt;/code&gt;. &lt;code&gt;PhoenixRetrievalMOEInferenceClusterId&lt;/code&gt; &lt;code&gt;&amp;quot;Experiment3Memy04&amp;quot;&lt;/code&gt; → &lt;code&gt;&amp;quot;Experiment2Memy04&amp;quot;&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Grox: &lt;code&gt;GROK_GEMMA_FOLLOWER_SPLIT&lt;/code&gt; &lt;code&gt;200_000&lt;/code&gt; → &lt;code&gt;225_000&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/1b3fec20bc3fd9879bc3e9f3d9c42753cdc3fede"&gt;Upstream commit 1b3fec2&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/1b3fec2.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 22, 2026 — New scorer vm_ranker_request and other changes.</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/3aa0fa3.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/3aa0fa336c4a20e4149b6151629b6050897bb8a5"/>
+    <id>tag:fitzyracing1.github.io,2026:3aa0fa336c4a20e4149b6151629b6050897bb8a5</id>
+    <published>2026-09-22T04:11:08Z</published>
+    <updated>2026-09-22T04:11:08Z</updated>
+    <summary>New scorer vm_ranker_request and other changes.</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Added 2 feature flags: &lt;code&gt;VMRankerComputeValueModel&lt;/code&gt; (default off) and &lt;code&gt;VMRankerSendValueModelInputs&lt;/code&gt; (default off).&lt;/li&gt;&lt;li&gt;Added 5 config parameters: &lt;code&gt;NewUserOonWeightFactor&lt;/code&gt; = &lt;code&gt;0.00001&lt;/code&gt;, &lt;code&gt;PhoenixMoeColdStartMaxResults&lt;/code&gt; = &lt;code&gt;0&lt;/code&gt;, &lt;code&gt;RetrievalCandidatesKafkaMaxCandidates&lt;/code&gt; = &lt;code&gt;200&lt;/code&gt;, &lt;code&gt;RetrievalCandidatesKafkaSamplePercent&lt;/code&gt; = &lt;code&gt;5.0&lt;/code&gt; and &lt;code&gt;SimclustersMaxCandidateAgeHours&lt;/code&gt; = &lt;code&gt;48&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;New scorer: &lt;code&gt;vm_ranker_request&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;New side effect: &lt;code&gt;retrieval_candidates_kafka_side_effect&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Constants changed: &lt;code&gt;FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION&lt;/code&gt; &lt;code&gt;50000&lt;/code&gt; → &lt;code&gt;80_000&lt;/code&gt; (task_filter.py) and &lt;code&gt;HYDRATION_TIMEOUT&lt;/code&gt; &lt;code&gt;Duration::from_millis(390)&lt;/code&gt; → &lt;code&gt;Duration::from_secs(1)&lt;/code&gt; (mod.rs).&lt;/li&gt;&lt;li&gt;Other literal values changed in code: &lt;code&gt;(4, tonic::Code::Unimplemented),&lt;/code&gt; 82→4 (evaluate_tweets.rs) and &lt;code&gt;Some(&amp;amp;2)&lt;/code&gt; 1→2 (metrics.rs).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;visibility-filtering/&lt;/code&gt; (+2,701/−1,442), &lt;code&gt;phoenix/&lt;/code&gt; (+1,371/−877), &lt;code&gt;home-mixer/&lt;/code&gt; (+1,075/−234), &lt;code&gt;phoenix-rankall/&lt;/code&gt; (+337/−44) and &lt;code&gt;grox/&lt;/code&gt; (+104/−4).&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/3aa0fa336c4a20e4149b6151629b6050897bb8a5"&gt;Upstream commit 3aa0fa3&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/3aa0fa3.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 18, 2026 — "Dwell regret" scoring gate removed; Under the Hood shows legal withholding</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/8b25829.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/8b25829717a4f104dd04403ee7d0253c5fedb1b7"/>
+    <id>tag:fitzyracing1.github.io,2026:8b25829717a4f104dd04403ee7d0253c5fedb1b7</id>
+    <published>2026-09-18T23:55:39Z</published>
+    <updated>2026-09-18T23:55:39Z</updated>
+    <summary>"Dwell regret" scoring gate removed; Under the Hood shows legal withholding</summary>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Removed scorer &lt;code&gt;value_model_gate&lt;/code&gt;&lt;/strong&gt; (537 lines). It was a per-viewer linear gate: it scored features from the viewer&amp;#x27;s recent action sequence and compared the score to a threshold to decide whether &lt;code&gt;ranking_scorer&lt;/code&gt; should use the alternative &amp;quot;dwell regret&amp;quot; scoring path. Inside the hysteresis band, a hash of the user ID made the call. With it go 18 params: every &lt;code&gt;DwellRegret*&lt;/code&gt; alpha/negative/gate/temperature param and &lt;code&gt;ValueModelMode&lt;/code&gt;. &lt;code&gt;ranking_scorer.rs&lt;/code&gt; loses 465 lines and gains 12.&lt;/li&gt;
+&lt;li&gt;New param &lt;code&gt;PhoenixColdStartMaxResults&lt;/code&gt; (default &lt;code&gt;0&lt;/code&gt;, i.e. off). &lt;code&gt;PhoenixRetrievalMOEInferenceClusterId&lt;/code&gt; changes from &lt;code&gt;&amp;quot;Experiment2Memy04&amp;quot;&lt;/code&gt; to &lt;code&gt;&amp;quot;Experiment3Memy04&amp;quot;&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Under the Hood:&lt;/strong&gt; the README&amp;#x27;s &amp;quot;September 18th, 2026&amp;quot; note says reports now show whether an account&amp;#x27;s or post&amp;#x27;s visibility was limited for legal compliance (e.g. withheld in a specific country). That matches the changes to &lt;code&gt;UthPctdAccountTakedownEventsJob.scala&lt;/code&gt; and &lt;code&gt;underTheHoodLabels.strato&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Visibility filtering gets a new &lt;code&gt;tes_composite&lt;/code&gt; hydration path and a batch &lt;code&gt;evaluate_tweets&lt;/code&gt; API.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/8b25829717a4f104dd04403ee7d0253c5fedb1b7"&gt;Upstream commit 8b25829&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/8b25829.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 18, 2026 — New filter task_safety_ptos_media_injected_adult_infrared_video_spam_detection_filter and other changes.</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/c279172.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/c279172eb8a992170f077d4c1d441923ef215d2e"/>
+    <id>tag:fitzyracing1.github.io,2026:c279172eb8a992170f077d4c1d441923ef215d2e</id>
+    <published>2026-09-18T01:07:14Z</published>
+    <updated>2026-09-18T01:07:14Z</updated>
+    <summary>New filter task_safety_ptos_media_injected_adult_infrared_video_spam_detection_filter and other changes.</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;New filter: &lt;code&gt;task_safety_ptos_media_injected_adult_infrared_video_spam_detection_filter&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Static list &lt;code&gt;BRAZIL_2026_ELECTION_USER_IDS&lt;/code&gt; (brazil_2026_election_filter.rs) grew from 2,707 to 2,776 entries (per its in-file test assertion).&lt;/li&gt;&lt;li&gt;Proto/Thrift schema: 12 fields added (e.g. &lt;code&gt;AdInfo.engagement_counts&lt;/code&gt;, &lt;code&gt;EngagementCountRow.action&lt;/code&gt;, &lt;code&gt;EngagementCountRow.counts&lt;/code&gt;, &lt;code&gt;EngagementCounts.present&lt;/code&gt; and 8 more).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;phoenix/&lt;/code&gt; (+423/−81), &lt;code&gt;abuse-enforcement-service/&lt;/code&gt; (+433/−62), &lt;code&gt;grox/&lt;/code&gt; (+489/−6), &lt;code&gt;home-mixer/&lt;/code&gt; (+144/−5) and &lt;code&gt;visibility-filtering/&lt;/code&gt; (+2/−0).&lt;/li&gt;&lt;li&gt;1 file changed only in formatting, comments or sync metadata.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/c279172eb8a992170f077d4c1d441923ef215d2e"&gt;Upstream commit c279172&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/c279172.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 17, 2026 — New filter fav_holdout_filter and other changes.</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/42266f3.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/42266f3e2be54d8a3c4d2228aac2e8f8d1c1f034"/>
+    <id>tag:fitzyracing1.github.io,2026:42266f3e2be54d8a3c4d2228aac2e8f8d1c1f034</id>
+    <published>2026-09-17T05:09:29Z</published>
+    <updated>2026-09-17T05:09:29Z</updated>
+    <summary>New filter fav_holdout_filter and other changes.</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Parameter defaults changed: &lt;code&gt;ColdStartMaxPostAgeSecs&lt;/code&gt;: &lt;code&gt;86400&lt;/code&gt; → &lt;code&gt;172800&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Added 2 feature flags: &lt;code&gt;EnableCdwellOnImpr&lt;/code&gt; (default off) and &lt;code&gt;EnableFavHoldout&lt;/code&gt; (default off).&lt;/li&gt;&lt;li&gt;Removed 1 feature flag: &lt;code&gt;EnableClickDwellLowFavRatePenalty&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Removed 4 config parameters: &lt;code&gt;ClickDwellLowFavRatePenaltyAlpha&lt;/code&gt;, &lt;code&gt;ClickDwellLowFavRatePenaltyBaseline&lt;/code&gt;, &lt;code&gt;ClickDwellLowFavRatePenaltyCap&lt;/code&gt; and &lt;code&gt;ClickDwellLowFavRatePenaltyFloor&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;New filters: &lt;code&gt;fav_holdout_filter&lt;/code&gt; and &lt;code&gt;RedactUnenforcedTakedownsFilter&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Constants changed: &lt;code&gt;GROK_GEMMA_FOLLOWER_SPLIT&lt;/code&gt; &lt;code&gt;180_000&lt;/code&gt; → &lt;code&gt;200_000&lt;/code&gt; (constants.py) and &lt;code&gt;FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION&lt;/code&gt; &lt;code&gt;30000&lt;/code&gt; → &lt;code&gt;50000&lt;/code&gt; (task_filter.py).&lt;/li&gt;&lt;li&gt;Other literal values changed in code: &lt;code&gt;reserved 234 to 252;&lt;/code&gt; 214→234 (recsys.proto) and &lt;code&gt;reserved 234 to 252;&lt;/code&gt; 214→234 (recsys.proto).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;visibility-filtering/&lt;/code&gt; (+84/−3,301), &lt;code&gt;under-the-hood/&lt;/code&gt; (+1,477/−137), &lt;code&gt;home-mixer/&lt;/code&gt; (+199/−112), &lt;code&gt;phoenix/&lt;/code&gt; (+148/−72) and &lt;code&gt;takedowns/&lt;/code&gt; (+218/−0).&lt;/li&gt;&lt;li&gt;1 file changed only in formatting, comments or sync metadata.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/42266f3e2be54d8a3c4d2228aac2e8f8d1c1f034"&gt;Upstream commit 42266f3&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/42266f3.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 16, 2026 — Feature switches flipped: enable ads brand safety verdict v2 off.</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/fad2f71.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/fad2f71edc780ab14e4cfaebbb8b221385782e43"/>
+    <id>tag:fitzyracing1.github.io,2026:fad2f71edc780ab14e4cfaebbb8b221385782e43</id>
+    <published>2026-09-16T01:11:22Z</published>
+    <updated>2026-09-16T01:11:22Z</updated>
+    <summary>Feature switches flipped: enable ads brand safety verdict v2 off.</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Feature switches flipped: &lt;code&gt;EnableAdsBrandSafetyVerdictV2&lt;/code&gt; (enable ads brand safety verdict v2) is now OFF by default.&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;phoenix/&lt;/code&gt; (+437/−38), &lt;code&gt;visibility-filtering/&lt;/code&gt; (+53/−184), &lt;code&gt;grox/&lt;/code&gt; (+38/−7), &lt;code&gt;abuse-enforcement-service/&lt;/code&gt; (+20/−1) and &lt;code&gt;home-mixer/&lt;/code&gt; (+4/−3).&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/fad2f71edc780ab14e4cfaebbb8b221385782e43"&gt;Upstream commit fad2f71&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/fad2f71.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 15, 2026 — New side effect response_diversity_stats_side_effect and other changes.</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/2d4a03c.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/2d4a03c2dbfb1214571d8098077c53f4ee8a9dc1"/>
+    <id>tag:fitzyracing1.github.io,2026:2d4a03c2dbfb1214571d8098077c53f4ee8a9dc1</id>
+    <published>2026-09-15T01:07:17Z</published>
+    <updated>2026-09-15T01:07:17Z</updated>
+    <summary>New side effect response_diversity_stats_side_effect and other changes.</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Added 1 feature flag: &lt;code&gt;EnableResponseDiversityStatsExperimentBucket&lt;/code&gt; (default off).&lt;/li&gt;&lt;li&gt;New side effect: &lt;code&gt;response_diversity_stats_side_effect&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Constants changed: &lt;code&gt;metrics_export_interval_ms&lt;/code&gt; &lt;code&gt;30_000&lt;/code&gt; → &lt;code&gt;120_000&lt;/code&gt; (kafkaloader.py).&lt;/li&gt;&lt;li&gt;Other literal values changed in code: &lt;code&gt;FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION&lt;/code&gt; 10000→30000 (task_filter.py) and &lt;code&gt;export_interval_ms&lt;/code&gt; 30_000→120_000 (kafkaloader.py).&lt;/li&gt;&lt;li&gt;Proto/Thrift schema: 4 fields added (e.g. &lt;code&gt;PredictNextActionsRequest.purchase_value_baselines&lt;/code&gt;, &lt;code&gt;PurchaseValueBaseline.advertiser_account_id&lt;/code&gt;, &lt;code&gt;PurchaseValueBaseline.impression_id&lt;/code&gt; and &lt;code&gt;PurchaseValueBaseline.mean_value_usd_28d&lt;/code&gt;).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;home-mixer/&lt;/code&gt; (+457/−5), &lt;code&gt;phoenix/&lt;/code&gt; (+136/−3) and &lt;code&gt;grox/&lt;/code&gt; (+1/−1).&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/2d4a03c2dbfb1214571d8098077c53f4ee8a9dc1"&gt;Upstream commit 2d4a03c&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/2d4a03c.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 12, 2026 — Code changes in home-mixer/, phoenix/ and visibility-filtering/ (24 files).</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/6bb4594.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/6bb4594253cdfa9ea19983a54a401d5ce8f8275d"/>
+    <id>tag:fitzyracing1.github.io,2026:6bb4594253cdfa9ea19983a54a401d5ce8f8275d</id>
+    <published>2026-09-12T02:18:08Z</published>
+    <updated>2026-09-12T02:18:08Z</updated>
+    <summary>Code changes in home-mixer/, phoenix/ and visibility-filtering/ (24 files).</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Static list &lt;code&gt;BRAZIL_2026_ELECTION_USER_IDS&lt;/code&gt; (brazil_2026_election_filter.rs) grew from 2,554 to 2,707 entries (per its in-file test assertion).&lt;/li&gt;&lt;li&gt;Proto/Thrift schema: 2 fields added (e.g. &lt;code&gt;NextActionDistribution.requestedActionLogits&lt;/code&gt; and &lt;code&gt;PredictNextActionsRequest.returnLogitsList&lt;/code&gt;).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;home-mixer/&lt;/code&gt; (+559/−98), &lt;code&gt;phoenix/&lt;/code&gt; (+311/−60), &lt;code&gt;visibility-filtering/&lt;/code&gt; (+282/−68), &lt;code&gt;vm-ranker/&lt;/code&gt; (+153/−41) and &lt;code&gt;grox/&lt;/code&gt; (+60/−55).&lt;/li&gt;&lt;li&gt;1 file changed only in formatting, comments or sync metadata.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/6bb4594253cdfa9ea19983a54a401d5ce8f8275d"&gt;Upstream commit 6bb4594&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/6bb4594.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 10, 2026 — Code changes in visibility-filtering/, grox/ and under-the-hood/ (33 files).</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/fee1d0f.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/fee1d0f3e99c25e4c10499e1aba4061c8d1cc86d"/>
+    <id>tag:fitzyracing1.github.io,2026:fee1d0f3e99c25e4c10499e1aba4061c8d1cc86d</id>
+    <published>2026-09-10T21:39:14Z</published>
+    <updated>2026-09-10T21:39:14Z</updated>
+    <summary>Code changes in visibility-filtering/, grox/ and under-the-hood/ (33 files).</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Constants changed: &lt;code&gt;_MOTION_REVEAL_MAX_INPUT_FRAMES&lt;/code&gt; &lt;code&gt;32&lt;/code&gt; → &lt;code&gt;48&lt;/code&gt; (image.py) and &lt;code&gt;_MOTION_REVEAL_DENSE_SAMPLES&lt;/code&gt; &lt;code&gt;32&lt;/code&gt; → &lt;code&gt;48&lt;/code&gt; (video_frames.py).&lt;/li&gt;&lt;li&gt;Other literal values changed in code: &lt;code&gt;(&amp;quot;grpc.keepalive_timeout_ms&amp;quot;, 20000),&lt;/code&gt; 5000→20000 (service.py) and &lt;code&gt;(&amp;quot;grpc.http2.min_ping_interval_without_data_ms&amp;quot;, 5&lt;/code&gt; 300000→5000 (service.py).&lt;/li&gt;&lt;li&gt;Proto/Thrift schema: 2 fields added (e.g. &lt;code&gt;UthAccountLabelAggregate.countryCodes&lt;/code&gt; and &lt;code&gt;UthPostLabelAggregate.countryCodes&lt;/code&gt;).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;visibility-filtering/&lt;/code&gt; (+1,118/−355), &lt;code&gt;grox/&lt;/code&gt; (+291/−28), &lt;code&gt;under-the-hood/&lt;/code&gt; (+145/−0), &lt;code&gt;phoenix/&lt;/code&gt; (+27/−6) and &lt;code&gt;home-mixer/&lt;/code&gt; (+6/−2).&lt;/li&gt;&lt;li&gt;1 file changed only in formatting, comments or sync metadata.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/fee1d0f3e99c25e4c10499e1aba4061c8d1cc86d"&gt;Upstream commit fee1d0f&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/fee1d0f.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 9, 2026 — Code changes in home-mixer/, visibility-filtering-client/ and grox/ (28 files).</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/75d93d9.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/75d93d9b6c7d08124173c513a727c37460ed5b04"/>
+    <id>tag:fitzyracing1.github.io,2026:75d93d9b6c7d08124173c513a727c37460ed5b04</id>
+    <published>2026-09-09T20:46:07Z</published>
+    <updated>2026-09-09T20:46:07Z</updated>
+    <summary>Code changes in home-mixer/, visibility-filtering-client/ and grox/ (28 files).</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Most activity in &lt;code&gt;home-mixer/&lt;/code&gt; (+452/−107), &lt;code&gt;visibility-filtering-client/&lt;/code&gt; (+137/−62), &lt;code&gt;grox/&lt;/code&gt; (+162/−31), &lt;code&gt;phoenix/&lt;/code&gt; (+42/−8) and &lt;code&gt;candidate-pipeline/&lt;/code&gt; (+3/−40).&lt;/li&gt;&lt;li&gt;1 file changed only in formatting, comments or sync metadata.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/75d93d9b6c7d08124173c513a727c37460ed5b04"&gt;Upstream commit 75d93d9&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/75d93d9.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 8, 2026 — New filter task_safety_ptos_adult_content_leading_frames_filter and other changes.</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/49815da.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/49815da255010f2468fb87b8bdd1283c2a507ca8"/>
+    <id>tag:fitzyracing1.github.io,2026:49815da255010f2468fb87b8bdd1283c2a507ca8</id>
+    <published>2026-09-08T19:23:54Z</published>
+    <updated>2026-09-08T19:23:54Z</updated>
+    <summary>New filter task_safety_ptos_adult_content_leading_frames_filter and other changes.</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Parameter defaults changed: &lt;code&gt;PhoenixRetrievalMOEInferenceClusterId&lt;/code&gt;: &lt;code&gt;&amp;quot;Experiment1Fou&amp;quot;&lt;/code&gt; → &lt;code&gt;&amp;quot;Experiment2Memy04&amp;quot;&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Added 2 config parameters: &lt;code&gt;WeightPerturbationSalt&lt;/code&gt; = &lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt; and &lt;code&gt;WeightPerturbationSigma&lt;/code&gt; = &lt;code&gt;0.0&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;New filter: &lt;code&gt;task_safety_ptos_adult_content_leading_frames_filter&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Constants changed: &lt;code&gt;FOLLOWER_COUNT_THRESHOLD_FOR_REPLY_RANKING&lt;/code&gt; &lt;code&gt;120000&lt;/code&gt; → &lt;code&gt;150000&lt;/code&gt; (task_filter.py), &lt;code&gt;_MOTION_REVEAL_MAX_RESIDUAL_P99&lt;/code&gt; &lt;code&gt;75.0&lt;/code&gt; → &lt;code&gt;100.0&lt;/code&gt; (image.py), &lt;code&gt;_MOTION_REVEAL_DENSE_SAMPLES&lt;/code&gt; &lt;code&gt;16&lt;/code&gt; → &lt;code&gt;32&lt;/code&gt; (video_frames.py) and &lt;code&gt;AOT_CACHE_VERSION&lt;/code&gt; &lt;code&gt;&amp;quot;20260705&amp;quot;&lt;/code&gt; → &lt;code&gt;&amp;quot;20260904&amp;quot;&lt;/code&gt; (aot.py).&lt;/li&gt;&lt;li&gt;Other literal values changed in code: &lt;code&gt;FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION&lt;/code&gt; 120000→150000 (task_filter.py) and &lt;code&gt;FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION&lt;/code&gt; 5000→10000 (task_filter.py).&lt;/li&gt;&lt;li&gt;Proto/Thrift schema: 9 fields added (e.g. &lt;code&gt;ContentFeatures.hasPhoto&lt;/code&gt;, &lt;code&gt;ContentFeatures.hasUrl&lt;/code&gt;, &lt;code&gt;ContentFeatures.hasVideo&lt;/code&gt;, &lt;code&gt;ContentFeatures.maxVideoDurationMs&lt;/code&gt; and 5 more).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;phoenix/&lt;/code&gt; (+8,569/−679), &lt;code&gt;grox/&lt;/code&gt; (+1,535/−74), &lt;code&gt;home-mixer/&lt;/code&gt; (+574/−141), &lt;code&gt;candidate-pipeline/&lt;/code&gt; (+105/−47) and &lt;code&gt;visibility-filtering-client/&lt;/code&gt; (+119/−0).&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/49815da255010f2468fb87b8bdd1283c2a507ca8"&gt;Upstream commit 49815da&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/49815da.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 4, 2026 — Code changes in home-mixer/, visibility-filtering/ and phoenix/ (25 files).</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/902a06f.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/902a06fd616ed815f660e5546d16d492fa1ca825"/>
+    <id>tag:fitzyracing1.github.io,2026:902a06fd616ed815f660e5546d16d492fa1ca825</id>
+    <published>2026-09-04T21:03:46Z</published>
+    <updated>2026-09-04T21:03:46Z</updated>
+    <summary>Code changes in home-mixer/, visibility-filtering/ and phoenix/ (25 files).</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Proto/Thrift schema: 1 field added (e.g. &lt;code&gt;PredictNextActionsRequest.experiment_overrides&lt;/code&gt;).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;home-mixer/&lt;/code&gt; (+236/−75), &lt;code&gt;visibility-filtering/&lt;/code&gt; (+128/−61) and &lt;code&gt;phoenix/&lt;/code&gt; (+116/−43).&lt;/li&gt;&lt;li&gt;1 file changed only in formatting, comments or sync metadata.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/902a06fd616ed815f660e5546d16d492fa1ca825"&gt;Upstream commit 902a06f&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/902a06f.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 4, 2026 — 1 new config parameter and code changes in visibility-filtering/, phoenix/ and grox/.</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/9b0dc31.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/9b0dc319691b76088266d0d2b48faf22d2b8a82a"/>
+    <id>tag:fitzyracing1.github.io,2026:9b0dc319691b76088266d0d2b48faf22d2b8a82a</id>
+    <published>2026-09-04T00:37:40Z</published>
+    <updated>2026-09-04T00:37:40Z</updated>
+    <summary>1 new config parameter and code changes in visibility-filtering/, phoenix/ and grox/.</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Added 1 config parameter: &lt;code&gt;PhoenixExperimentOverrides&lt;/code&gt; = &lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Constants changed: &lt;code&gt;use_pinned_d2h&lt;/code&gt; &lt;code&gt;False&lt;/code&gt; → &lt;code&gt;True&lt;/code&gt; (model_runner.py).&lt;/li&gt;&lt;li&gt;Other literal values changed in code: &lt;code&gt;FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION&lt;/code&gt; 1000→5000 (task_filter.py), &lt;code&gt;input_output_aliases&lt;/code&gt; 12→14, 13→15, 14→16 (ranker_attention_fa4.py) and &lt;code&gt;default&lt;/code&gt; False→True (launch_inference.py).&lt;/li&gt;&lt;li&gt;Static list &lt;code&gt;BRAZIL_2026_ELECTION_USER_IDS&lt;/code&gt; (brazil_2026_election_filter.rs) grew from 2,388 to 2,554 entries (per its in-file test assertion).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;visibility-filtering/&lt;/code&gt; (+560/−1,511), &lt;code&gt;phoenix/&lt;/code&gt; (+425/−367), &lt;code&gt;grox/&lt;/code&gt; (+504/−19), &lt;code&gt;home-mixer/&lt;/code&gt; (+408/−29) and &lt;code&gt;abuse-enforcement-service/&lt;/code&gt; (+57/−0).&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/9b0dc319691b76088266d0d2b48faf22d2b8a82a"&gt;Upstream commit 9b0dc31&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/9b0dc31.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 3, 2026 — Community PR #88 merged: dedupe in-network IDs before visibility lookup</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/e4dcedd.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/e4dcedd3b2db8b7a9cc244c2b616d04a0ee2c353"/>
+    <id>tag:fitzyracing1.github.io,2026:e4dcedd3b2db8b7a9cc244c2b616d04a0ee2c353</id>
+    <published>2026-09-03T20:28:53Z</published>
+    <updated>2026-09-03T20:28:53Z</updated>
+    <summary>Community PR #88 merged: dedupe in-network IDs before visibility lookup</summary>
+    <content type="html">&lt;p&gt;Merge of &lt;a href="https://github.com/xai-org/x-algorithm/pull/88"&gt;PR #88&lt;/a&gt; from &lt;code&gt;joshs1017dev&lt;/code&gt;. &lt;code&gt;VFCandidateHydrator&lt;/code&gt; now sorts and dedups &lt;code&gt;in_network_ids&lt;/code&gt; (&lt;code&gt;sort_unstable()&lt;/code&gt; + &lt;code&gt;dedup()&lt;/code&gt;) before calling visibility filtering, so duplicate IDs aren&amp;#x27;t looked up twice. Two lines changed. This is the only commit in the history from an outside contributor.&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/e4dcedd3b2db8b7a9cc244c2b616d04a0ee2c353"&gt;Upstream commit e4dcedd&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/e4dcedd.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 2, 2026 — Parameter changes: phoenix retrieval aggregation type "DENSE_WITH_SHORT_DWELL"→"DENSE_WITH_LONG_DWELL".</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/85ac72a.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/85ac72a1bba41f21615e3f0bca56da75970a6633"/>
+    <id>tag:fitzyracing1.github.io,2026:85ac72a1bba41f21615e3f0bca56da75970a6633</id>
+    <published>2026-09-02T19:46:48Z</published>
+    <updated>2026-09-02T19:46:48Z</updated>
+    <summary>Parameter changes: phoenix retrieval aggregation type "DENSE_WITH_SHORT_DWELL"→"DENSE_WITH_LONG_DWELL".</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Parameter defaults changed: &lt;code&gt;PhoenixRetrievalAggregationType&lt;/code&gt;: &lt;code&gt;&amp;quot;DENSE_WITH_SHORT_DWELL&amp;quot;&lt;/code&gt; → &lt;code&gt;&amp;quot;DENSE_WITH_LONG_DWELL&amp;quot;&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Other literal values changed in code: &lt;code&gt;qk_norm&lt;/code&gt; False→True (xrecsys_two_tower.py) and &lt;code&gt;attn_logit_cap&lt;/code&gt; 80.0→-1 (xrecsys_two_tower.py).&lt;/li&gt;&lt;li&gt;Proto/Thrift schema: 3 fields added (e.g. &lt;code&gt;NextActionDistribution.backboneContinuousValues&lt;/code&gt;, &lt;code&gt;NextActionDistribution.backboneTopLogProbs&lt;/code&gt; and &lt;code&gt;PredictNextActionsRequest.returnBackboneScores&lt;/code&gt;).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;visibility-filtering/&lt;/code&gt; (+392/−426), &lt;code&gt;phoenix/&lt;/code&gt; (+338/−93), &lt;code&gt;scarecrow/&lt;/code&gt; (+333/−0), &lt;code&gt;home-mixer/&lt;/code&gt; (+16/−4) and &lt;code&gt;grox/&lt;/code&gt; (+2/−2).&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/85ac72a1bba41f21615e3f0bca56da75970a6633"&gt;Upstream commit 85ac72a&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/85ac72a.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 1, 2026 — Ads blender switched to "multi_risk"</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/7ba7768.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/7ba776848b12d8422eb0f291ee03ea5c17ab0188"/>
+    <id>tag:fitzyracing1.github.io,2026:7ba776848b12d8422eb0f291ee03ea5c17ab0188</id>
+    <published>2026-09-01T20:47:22Z</published>
+    <updated>2026-09-01T20:47:22Z</updated>
+    <summary>Ads blender switched to "multi_risk"</summary>
+    <content type="html">&lt;p&gt;&lt;code&gt;AdsBlenderType&lt;/code&gt; (feature switch &lt;code&gt;rust_home_mixer_ads_blender&lt;/code&gt;) changes from &lt;code&gt;&amp;quot;partition_organic_low_risk&amp;quot;&lt;/code&gt; to &lt;code&gt;&amp;quot;multi_risk&amp;quot;&lt;/code&gt;. That makes the multi-risk blender added on Aug 28 the default for placing ads in the feed. Apart from home-mixer, this sync mostly touches &lt;code&gt;visibility-filtering/rules/&lt;/code&gt;, &lt;code&gt;phoenix/&lt;/code&gt; and &lt;code&gt;grox/&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/7ba776848b12d8422eb0f291ee03ea5c17ab0188"&gt;Upstream commit 7ba7768&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/7ba7768.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Sep 1, 2026 — New filter task_safety_ptos_special_video_filter and other changes.</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/6384ca7.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/6384ca7d2c8570fbc645c20c3291730739ac00ce"/>
+    <id>tag:fitzyracing1.github.io,2026:6384ca7d2c8570fbc645c20c3291730739ac00ce</id>
+    <published>2026-09-01T00:11:04Z</published>
+    <updated>2026-09-01T00:11:04Z</updated>
+    <summary>New filter task_safety_ptos_special_video_filter and other changes.</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Added 1 feature flag: &lt;code&gt;EnablePhoenixScoreStatsExperimentBucket&lt;/code&gt; (default off).&lt;/li&gt;&lt;li&gt;New filter: &lt;code&gt;task_safety_ptos_special_video_filter&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Static list &lt;code&gt;BRAZIL_2026_ELECTION_USER_IDS&lt;/code&gt; (brazil_2026_election_filter.rs) grew from 2,315 to 2,388 entries (per its in-file test assertion).&lt;/li&gt;&lt;li&gt;Proto/Thrift schema: 8 fields added (e.g. &lt;code&gt;CandidateDistributionSet.pageDecodeResult&lt;/code&gt;, &lt;code&gt;PageDecodeParams.poolN&lt;/code&gt;, &lt;code&gt;PageDecodeParams.steps&lt;/code&gt;, &lt;code&gt;PageDecodeParams.temperature&lt;/code&gt; and 4 more).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;visibility-filtering/&lt;/code&gt; (+680/−203), &lt;code&gt;phoenix/&lt;/code&gt; (+438/−189), &lt;code&gt;grox/&lt;/code&gt; (+479/−19), &lt;code&gt;home-mixer/&lt;/code&gt; (+313/−94) and &lt;code&gt;abuse-enforcement-service/&lt;/code&gt; (+104/−173).&lt;/li&gt;&lt;li&gt;3 files changed only in formatting, comments or sync metadata.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/6384ca7d2c8570fbc645c20c3291730739ac00ce"&gt;Upstream commit 6384ca7&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/6384ca7.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Aug 28, 2026 — 1 new config parameter and code changes in visibility-filtering/, phoenix/ and home-mixer/.</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/bc8e5f0.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/bc8e5f0f07b31337bfdcaf690121498e00199b64"/>
+    <id>tag:fitzyracing1.github.io,2026:bc8e5f0f07b31337bfdcaf690121498e00199b64</id>
+    <published>2026-08-28T22:37:32Z</published>
+    <updated>2026-08-28T22:37:32Z</updated>
+    <summary>1 new config parameter and code changes in visibility-filtering/, phoenix/ and home-mixer/.</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Added 1 config parameter: &lt;code&gt;RerankerHeadTag&lt;/code&gt; = &lt;code&gt;0&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;visibility-filtering/&lt;/code&gt; (+1,825/−1,144), &lt;code&gt;phoenix/&lt;/code&gt; (+112/−27), &lt;code&gt;home-mixer/&lt;/code&gt; (+12/−3) and &lt;code&gt;(repo root)&lt;/code&gt; (+1/−1).&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/bc8e5f0f07b31337bfdcaf690121498e00199b64"&gt;Upstream commit bc8e5f0&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/bc8e5f0.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Aug 28, 2026 — New "multi-risk" ads blender</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/24c6094.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/24c60942c5c5fdad3a6addffb4c6e6d2f228f04f"/>
+    <id>tag:fitzyracing1.github.io,2026:24c60942c5c5fdad3a6addffb4c6e6d2f228f04f</id>
+    <published>2026-08-28T01:00:41Z</published>
+    <updated>2026-08-28T01:00:41Z</updated>
+    <summary>New "multi-risk" ads blender</summary>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;New &lt;code&gt;MultiRiskAdsBlender&lt;/code&gt;&lt;/strong&gt; (&lt;code&gt;home-mixer/ads/multi_risk_blender.rs&lt;/code&gt;). It places ads by the brand-safety verdict of the surrounding organic posts. It counts safe, medium-risk and high-risk posts, caps ad slots at half the safe posts (and half the medium-risk posts for the medium path), keeps the requested ad spacing, and records stats when ads can&amp;#x27;t be served (&lt;code&gt;no_ads&lt;/code&gt;, &lt;code&gt;too_few_posts&lt;/code&gt;, …). This commit doesn&amp;#x27;t make it the default (see Sep 1).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;viewer_muted_keyword_filter&lt;/code&gt; and the &lt;code&gt;response_stats&lt;/code&gt; side effect get small additions, and a &lt;code&gt;strato_context&lt;/code&gt; helper is added.&lt;/li&gt;
+&lt;li&gt;The Brazil election list changes from 2,328 to 2,315 accounts.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/24c60942c5c5fdad3a6addffb4c6e6d2f228f04f"&gt;Upstream commit 24c6094&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/24c6094.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Aug 26, 2026 — Code changes in phoenix/, visibility-filtering/ and grox/ (36 files).</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/45b48ba.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/45b48ba6baa40e212f6dcbaf8fe9fdc8d9da722e"/>
+    <id>tag:fitzyracing1.github.io,2026:45b48ba6baa40e212f6dcbaf8fe9fdc8d9da722e</id>
+    <published>2026-08-26T20:04:12Z</published>
+    <updated>2026-08-26T20:04:12Z</updated>
+    <summary>Code changes in phoenix/, visibility-filtering/ and grox/ (36 files).</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Proto/Thrift schema: 4 fields added (e.g. &lt;code&gt;ConvAssetIds.asset_id&lt;/code&gt;, &lt;code&gt;ConvAssetIds.author_id&lt;/code&gt;, &lt;code&gt;ConvAssetIds.impressed_time_ms&lt;/code&gt; and &lt;code&gt;PredictNextActionsRequest.conv_asset_ids&lt;/code&gt;).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;phoenix/&lt;/code&gt; (+744/−172), &lt;code&gt;visibility-filtering/&lt;/code&gt; (+47/−341), &lt;code&gt;grox/&lt;/code&gt; (+73/−11) and &lt;code&gt;home-mixer/&lt;/code&gt; (+9/−1).&lt;/li&gt;&lt;li&gt;1 file changed only in formatting, comments or sync metadata.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/45b48ba6baa40e212f6dcbaf8fe9fdc8d9da722e"&gt;Upstream commit 45b48ba&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/45b48ba.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Aug 25, 2026 — Ranking weights: dwell 0 → 0.05, video open 0.05 → 0.07, VQV 0.05 → 0</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/0d3cdd8.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/0d3cdd806c405f04db7030f720b48687aa304061"/>
+    <id>tag:fitzyracing1.github.io,2026:0d3cdd806c405f04db7030f720b48687aa304061</id>
+    <published>2026-08-25T23:20:04Z</published>
+    <updated>2026-08-25T23:20:04Z</updated>
+    <summary>Ranking weights: dwell 0 → 0.05, video open 0.05 → 0.07, VQV 0.05 → 0</summary>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Weight changes&lt;/strong&gt; in &lt;code&gt;home-mixer/params/param.rs&lt;/code&gt;: &lt;code&gt;DwellWeight&lt;/code&gt; &lt;code&gt;0.0&lt;/code&gt; → &lt;code&gt;0.05&lt;/code&gt;, &lt;code&gt;VideoOpenWeight&lt;/code&gt; &lt;code&gt;0.05&lt;/code&gt; → &lt;code&gt;0.07&lt;/code&gt;, &lt;code&gt;VqvWeight&lt;/code&gt; (video quality view) &lt;code&gt;0.05&lt;/code&gt; → &lt;code&gt;0.0&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PhoenixAggregationType&lt;/code&gt; default goes from &lt;code&gt;&amp;quot;DENSE_WITH_SHORT_DWELL&amp;quot;&lt;/code&gt; to &lt;code&gt;&amp;quot;DENSE_WITH_LONG_DWELL&amp;quot;&lt;/code&gt;, and the shadow-traffic cluster list &lt;code&gt;ShadowTrafficPhoenixClusterRates&lt;/code&gt; is emptied.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;EnableAdsBrandSafetyVerdictV2&lt;/code&gt; is now on by default. &lt;code&gt;ColdStartTsTopK&lt;/code&gt; drops from 5 to 2.&lt;/li&gt;
+&lt;li&gt;Removed params: &lt;code&gt;UseServedSlateContext&lt;/code&gt;, &lt;code&gt;VMRankerValueModelId&lt;/code&gt;, &lt;code&gt;VMRankerSendHeadWeights&lt;/code&gt;. &lt;code&gt;EnableMpnScoring&lt;/code&gt; is replaced by a new &lt;code&gt;MultiplierPreOffset&lt;/code&gt; flag. &lt;code&gt;ranking_scorer.rs&lt;/code&gt; is reworked: the per-candidate &lt;code&gt;effective_head_weights&lt;/code&gt; function is removed and the author-diversity code is restructured.&lt;/li&gt;
+&lt;li&gt;The author cold-start scorer now uses &lt;code&gt;view_count_on_home&lt;/code&gt; (impressions on Home) instead of the overall &lt;code&gt;view_count&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;New &lt;code&gt;following_blocked_by_hydrator&lt;/code&gt; flags retweets and quotes whose original author blocks the viewer.&lt;/li&gt;
+&lt;li&gt;The Brazil election list grows from 665 to 2,328 accounts, and the README adds an &amp;quot;Account list updated&amp;quot; note.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/0d3cdd806c405f04db7030f720b48687aa304061"&gt;Upstream commit 0d3cdd8&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/0d3cdd8.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Aug 24, 2026 — Code changes in visibility-filtering/, grox/ and phoenix/ (19 files).</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/d011592.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/d011592a1c8c4bfb23781ff15577a68dc08bdde1"/>
+    <id>tag:fitzyracing1.github.io,2026:d011592a1c8c4bfb23781ff15577a68dc08bdde1</id>
+    <published>2026-08-24T18:51:34Z</published>
+    <updated>2026-08-24T18:51:34Z</updated>
+    <summary>Code changes in visibility-filtering/, grox/ and phoenix/ (19 files).</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Constants changed: &lt;code&gt;FOLLOWER_COUNT_THRESHOLD_FOR_REPLY_RANKING&lt;/code&gt; &lt;code&gt;80000&lt;/code&gt; → &lt;code&gt;100000&lt;/code&gt; (task_filter.py).&lt;/li&gt;&lt;li&gt;Other literal values changed in code: &lt;code&gt;FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION&lt;/code&gt; 80000→100000 (task_filter.py).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;visibility-filtering/&lt;/code&gt; (+906/−6), &lt;code&gt;grox/&lt;/code&gt; (+294/−56), &lt;code&gt;phoenix/&lt;/code&gt; (+178/−36) and &lt;code&gt;home-mixer/&lt;/code&gt; (+40/−19).&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/d011592a1c8c4bfb23781ff15577a68dc08bdde1"&gt;Upstream commit d011592&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/d011592.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Aug 21, 2026 — Code changes in phoenix/, grox/ and visibility-filtering/ (35 files).</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/28e414f.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/28e414f535e4b5a50ca12ee87674e7649e50c7ad"/>
+    <id>tag:fitzyracing1.github.io,2026:28e414f535e4b5a50ca12ee87674e7649e50c7ad</id>
+    <published>2026-08-21T19:10:38Z</published>
+    <updated>2026-08-21T19:10:38Z</updated>
+    <summary>Code changes in phoenix/, grox/ and visibility-filtering/ (35 files).</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Constants changed: &lt;code&gt;FOLLOWER_COUNT_THRESHOLD_FOR_REPLY_RANKING&lt;/code&gt; &lt;code&gt;60000&lt;/code&gt; → &lt;code&gt;80000&lt;/code&gt; (task_filter.py).&lt;/li&gt;&lt;li&gt;Other literal values changed in code: &lt;code&gt;mode&lt;/code&gt; 4.5→4.6 (classifier.py) and &lt;code&gt;FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION&lt;/code&gt; 60000→80000 (task_filter.py).&lt;/li&gt;&lt;li&gt;Proto/Thrift schema: 1 field added (e.g. &lt;code&gt;NextActionDistribution.slateContext&lt;/code&gt;).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;phoenix/&lt;/code&gt; (+835/−79), &lt;code&gt;grox/&lt;/code&gt; (+8/−66) and &lt;code&gt;visibility-filtering/&lt;/code&gt; (+13/−7).&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/28e414f535e4b5a50ca12ee87674e7649e50c7ad"&gt;Upstream commit 28e414f&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/28e414f.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Aug 20, 2026 — New candidate hydrator ai_trend_feedback_context_hydrator and other changes.</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/d0cef2f.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/d0cef2f943084ee0d4310378031c9c2c37d67f12"/>
+    <id>tag:fitzyracing1.github.io,2026:d0cef2f943084ee0d4310378031c9c2c37d67f12</id>
+    <published>2026-08-20T20:22:58Z</published>
+    <updated>2026-08-20T20:22:58Z</updated>
+    <summary>New candidate hydrator ai_trend_feedback_context_hydrator and other changes.</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Added 2 feature flags: &lt;code&gt;EnableAiTrendFeedbackContext&lt;/code&gt; (default off) and &lt;code&gt;UseServedSlateContext&lt;/code&gt; (default off).&lt;/li&gt;&lt;li&gt;New candidate hydrator: &lt;code&gt;ai_trend_feedback_context_hydrator&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Constants changed: &lt;code&gt;_GROK_4_6_INTERNAL_DIAL&lt;/code&gt; &lt;code&gt;0.1&lt;/code&gt; → &lt;code&gt;0.3&lt;/code&gt; (classifier.py).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;phoenix/&lt;/code&gt; (+189/−169), &lt;code&gt;home-mixer/&lt;/code&gt; (+255/−17) and &lt;code&gt;grox/&lt;/code&gt; (+35/−14).&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/d0cef2f943084ee0d4310378031c9c2c37d67f12"&gt;Upstream commit d0cef2f&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/d0cef2f.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Aug 19, 2026 — New filter following_viewer_muted_keyword_filter and other changes.</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/aad7179.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/aad7179773944e17eb8798bbbf0231d6cd6c1ffc"/>
+    <id>tag:fitzyracing1.github.io,2026:aad7179773944e17eb8798bbbf0231d6cd6c1ffc</id>
+    <published>2026-08-19T21:25:42Z</published>
+    <updated>2026-08-19T21:25:42Z</updated>
+    <summary>New filter following_viewer_muted_keyword_filter and other changes.</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;New candidate hydrator: &lt;code&gt;quoted_post_text_hydrator&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;New filter: &lt;code&gt;following_viewer_muted_keyword_filter&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Renamed: &lt;code&gt;muted_keyword_filter&lt;/code&gt; → &lt;code&gt;viewer_muted_keyword_filter&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Constants changed: &lt;code&gt;MULTIPART_PART_SIZE&lt;/code&gt; &lt;code&gt;16 * 1024 * 1024&lt;/code&gt; → &lt;code&gt;32 * 1024 * 1024&lt;/code&gt; (checkpoint_store.rs).&lt;/li&gt;&lt;li&gt;Other literal values changed in code: &lt;code&gt;mode&lt;/code&gt; 4.5→4.6 (classifier.py), &lt;code&gt;learning_rate&lt;/code&gt; 1e-3→7.1e-4 (xrecsys.py), &lt;code&gt;static_assert(sizeof(UpdateScalars) == 4 * sizeof(&lt;/code&gt; 3→4 (async_emb_kernel.hpp), &lt;code&gt;input_output_aliases&lt;/code&gt; 12→14, 13→15, 14→16 (ranker_attention_varlen_fa4.py), &lt;code&gt;input_output_aliases&lt;/code&gt; 12→14 (ranker_attention_varlen_fa4.py) and 2 more.&lt;/li&gt;&lt;li&gt;Proto/Thrift schema: 8 fields added (e.g. &lt;code&gt;FetchAggregatedUserActionRequests.feature_switch_overrides&lt;/code&gt;, &lt;code&gt;NextActionDistribution.rewardOutputs&lt;/code&gt;, &lt;code&gt;RewardOutputs.policyLogits&lt;/code&gt;, &lt;code&gt;RewardOutputs.values&lt;/code&gt; and 4 more).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;phoenix/&lt;/code&gt; (+2,811/−536), &lt;code&gt;home-mixer/&lt;/code&gt; (+222/−25), &lt;code&gt;grox/&lt;/code&gt; (+146/−88) and &lt;code&gt;visibility-filtering/&lt;/code&gt; (+124/−2).&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/aad7179773944e17eb8798bbbf0231d6cd6c1ffc"&gt;Upstream commit aad7179&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/aad7179.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Aug 18, 2026 — New candidate hydrator vf_following_candidate_hydrator and other changes.</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/11a71f8.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/11a71f87d6a7fc4c1e8159dad8f3c5ff90a0f7ed"/>
+    <id>tag:fitzyracing1.github.io,2026:11a71f87d6a7fc4c1e8159dad8f3c5ff90a0f7ed</id>
+    <published>2026-08-18T18:57:00Z</published>
+    <updated>2026-08-18T18:57:00Z</updated>
+    <summary>New candidate hydrator vf_following_candidate_hydrator and other changes.</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;New candidate hydrator: &lt;code&gt;vf_following_candidate_hydrator&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Constants changed: &lt;code&gt;FOLLOWER_COUNT_THRESHOLD_FOR_REPLY_RANKING&lt;/code&gt; &lt;code&gt;40000&lt;/code&gt; → &lt;code&gt;60000&lt;/code&gt; (task_filter.py).&lt;/li&gt;&lt;li&gt;Other literal values changed in code: &lt;code&gt;FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION&lt;/code&gt; 40000→60000 (task_filter.py), &lt;code&gt;counts.get(&amp;amp;(1, pb::ServedType::ForYouPhoenixRetri&lt;/code&gt; 10→1 (author_cold_start.rs) and &lt;code&gt;counts.get(&amp;amp;(2, pb::ServedType::ForYouPhoenixRetri&lt;/code&gt; 10→2 (author_cold_start.rs).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;home-mixer/&lt;/code&gt; (+185/−42), &lt;code&gt;grox/&lt;/code&gt; (+8/−19), &lt;code&gt;phoenix-rankall-strato/&lt;/code&gt; (+12/−9) and &lt;code&gt;visibility-filtering/&lt;/code&gt; (+3/−0).&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/11a71f87d6a7fc4c1e8159dad8f3c5ff90a0f7ed"&gt;Upstream commit 11a71f8&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/11a71f8.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Aug 17, 2026 — 1 new config parameter and code changes in grox/, home-mixer/ and bdsm/.</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/b089ce6.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/b089ce64891f9c50fab73aa00dbe65acb82f198f"/>
+    <id>tag:fitzyracing1.github.io,2026:b089ce64891f9c50fab73aa00dbe65acb82f198f</id>
+    <published>2026-08-17T20:20:07Z</published>
+    <updated>2026-08-17T20:20:07Z</updated>
+    <summary>1 new config parameter and code changes in grox/, home-mixer/ and bdsm/.</summary>
+    <content type="html">&lt;ul&gt;&lt;li&gt;Added 1 feature flag: &lt;code&gt;EnableAdsBrandSafetyVerdictV2&lt;/code&gt; (default off).&lt;/li&gt;&lt;li&gt;Constants changed: &lt;code&gt;min_actions_for_enforcement&lt;/code&gt; &lt;code&gt;30&lt;/code&gt; → &lt;code&gt;999999&lt;/code&gt; (score_results_sink_focal.py), &lt;code&gt;FOLLOWER_COUNT_THRESHOLD_FOR_REPLY_RANKING&lt;/code&gt; &lt;code&gt;30000&lt;/code&gt; → &lt;code&gt;40000&lt;/code&gt; (task_filter.py) and &lt;code&gt;FOLLOWING_MAX_RESULT_SIZE&lt;/code&gt; &lt;code&gt;100&lt;/code&gt; → &lt;code&gt;110&lt;/code&gt; (config.rs).&lt;/li&gt;&lt;li&gt;Other literal values changed in code: &lt;code&gt;version&lt;/code&gt; 13→14 (sink_policy.yaml), &lt;code&gt;min_actions_for_enforcement&lt;/code&gt; 30→999999 (sink_policy.yaml), &lt;code&gt;2026-08-14: enforcement policy for the 8-head beha&lt;/code&gt; 13→14 (sink_policy.yaml) and &lt;code&gt;FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION&lt;/code&gt; 30000→40000 (task_filter.py).&lt;/li&gt;&lt;li&gt;Most activity in &lt;code&gt;grox/&lt;/code&gt; (+375/−57), &lt;code&gt;home-mixer/&lt;/code&gt; (+276/−15), &lt;code&gt;bdsm/&lt;/code&gt; (+58/−33), &lt;code&gt;phoenix-rankall-strato/&lt;/code&gt; (+35/−44) and &lt;code&gt;phoenix/&lt;/code&gt; (+5/−13).&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/b089ce64891f9c50fab73aa00dbe65acb82f198f"&gt;Upstream commit b089ce6&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/b089ce6.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Aug 14, 2026 — Brazil 2026 election filter; Thompson-sampling params for author cold start</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/c65aa17.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/c65aa179db7bdd61e2c2821eac87f208a105c053"/>
+    <id>tag:fitzyracing1.github.io,2026:c65aa179db7bdd61e2c2821eac87f208a105c053</id>
+    <published>2026-08-14T20:55:37Z</published>
+    <updated>2026-08-14T20:55:37Z</updated>
+    <summary>Brazil 2026 election filter; Thompson-sampling params for author cold start</summary>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;New filter &lt;code&gt;Brazil2026ElectionFilter&lt;/code&gt;&lt;/strong&gt; (&lt;code&gt;home-mixer/filters/brazil_2026_election_filter.rs&lt;/code&gt;). It removes a candidate when its author, the retweeted author, the quoted author, or any author in the reply&amp;#x27;s ancestor chain is on a hard-coded list of accounts reported to Brazil&amp;#x27;s Electoral Court, &lt;strong&gt;unless the viewer follows that account&lt;/strong&gt;. The list starts with 665 user IDs, and code comments cite the TSE open-data candidate dataset. The upstream README&amp;#x27;s &amp;quot;August 14th, 2026&amp;quot; notes describe the same filter.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Author cold start:&lt;/strong&gt; new params &lt;code&gt;EnableColdStartThompsonSampling&lt;/code&gt; (default off), &lt;code&gt;ColdStartBetaAlpha0&lt;/code&gt; = 0.75, &lt;code&gt;ColdStartBetaBeta0&lt;/code&gt; = 49.25, &lt;code&gt;ColdStartTsTopK&lt;/code&gt; = 5, &lt;code&gt;ColdStartImpressionScale&lt;/code&gt; = 1.0 and &lt;code&gt;ColdStartTrackedIds&lt;/code&gt;. These let the cold-start boost choose among eligible low-impression posts by sampling a Beta posterior of likes per impression, rather than taking the highest-scored one.&lt;/li&gt;
+&lt;li&gt;Comments added to &lt;code&gt;home-mixer/params/param.rs&lt;/code&gt; explain that each weight multiplies the *predicted* probability of an action, not raw engagement counts. The README is restructured into a &amp;quot;Latest Updates&amp;quot; list with an August 14th entry.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/c65aa179db7bdd61e2c2821eac87f208a105c053"&gt;Upstream commit c65aa17&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/c65aa17.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Aug 13, 2026 — .gitattributes removed (Git LFS tracking for *.npz and *.zip)</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/a389166.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/a389166f6cf5da70a286b568c87695d4dcdce3a1"/>
+    <id>tag:fitzyracing1.github.io,2026:a389166f6cf5da70a286b568c87695d4dcdce3a1</id>
+    <published>2026-08-13T17:23:56Z</published>
+    <updated>2026-08-13T17:23:56Z</updated>
+    <summary>.gitattributes removed (Git LFS tracking for *.npz and *.zip)</summary>
+    <content type="html">&lt;p&gt;Deletes the two-line &lt;code&gt;.gitattributes&lt;/code&gt; that routed &lt;code&gt;*.npz&lt;/code&gt; and &lt;code&gt;*.zip&lt;/code&gt; files through Git LFS. No algorithm code changed.&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/a389166f6cf5da70a286b568c87695d4dcdce3a1"&gt;Upstream commit a389166&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/a389166.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Aug 13, 2026 — Aug 13 release: ranking parameters, visibility filtering, labelers, Phoenix training code</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/47c1bcd.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/47c1bcdadfe4911568fd6db4f8838b194325beab"/>
+    <id>tag:fitzyracing1.github.io,2026:47c1bcdadfe4911568fd6db4f8838b194325beab</id>
+    <published>2026-08-13T17:09:58Z</published>
+    <updated>2026-08-13T17:09:58Z</updated>
+    <summary>Aug 13 release: ranking parameters, visibility filtering, labelers, Phoenix training code</summary>
+    <content type="html">&lt;p&gt;The biggest drop in the repo&amp;#x27;s history (2,053 files, +363,246/−11,640). The upstream README&amp;#x27;s &amp;quot;August 13th, 2026&amp;quot; notes cover it.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Ranking configuration is now public.&lt;/strong&gt; &lt;code&gt;home-mixer/params/param.rs&lt;/code&gt; appears with 189 &lt;code&gt;param!&lt;/code&gt; feature-switch defaults, including the action weights that blend predicted engagement probabilities into one score (for example &lt;code&gt;ReplyWeight&lt;/code&gt;, &lt;code&gt;ShareViaCopyLinkWeight&lt;/code&gt; and the negative &lt;code&gt;ReportWeight&lt;/code&gt;/&lt;code&gt;BlockAuthorWeight&lt;/code&gt;). See the parameter tracker on this site for how they&amp;#x27;ve changed since.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Visibility filtering:&lt;/strong&gt; &lt;code&gt;visibility-filtering/&lt;/code&gt; decides whether a post is shown, dropped, or shown behind an interstitial.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;The systems that produce the labels it reads:&lt;/strong&gt; rule engines (&lt;code&gt;botmaker/&lt;/code&gt;, &lt;code&gt;botmaker-rules/&lt;/code&gt;, &lt;code&gt;scarecrow/&lt;/code&gt;), account-scoring models (&lt;code&gt;agatha/&lt;/code&gt;, &lt;code&gt;bdsm/&lt;/code&gt;, &lt;code&gt;user-cred-v2/&lt;/code&gt;), media models (&lt;code&gt;media-model-proxy/&lt;/code&gt;, &lt;code&gt;clip/&lt;/code&gt;) and enforcement (&lt;code&gt;abuse-enforcement-service/&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Phoenix:&lt;/strong&gt; the demo model is replaced by the training code plus synthetic data generation.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SimClusters&lt;/strong&gt; (&lt;code&gt;simclusters/&lt;/code&gt;) is added as another out-of-network candidate source, alongside Thunder and Phoenix retrieval.&lt;/li&gt;
+&lt;li&gt;New home-mixer filters include &lt;code&gt;ad_adjacent_served_filter&lt;/code&gt;, &lt;code&gt;following_retweet_deduplication_filter&lt;/code&gt;, &lt;code&gt;self_reply_chain_filter&lt;/code&gt; and &lt;code&gt;oon_nsfw_simclusters_filter&lt;/code&gt;. See the full analysis for the complete list.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;docs/BIDIRECTIONAL_BOOST_CHANGE.md&lt;/code&gt;&lt;/strong&gt; is a worked example of a changelog. It walks through the July 2026 rollout of the bidirectional-follow reply boost (A/B tested at 5/10/15/20 from July 10, broadly launched at 20 on July 13, set to 15 on July 24) and says future updates will be published to the repo so readers &amp;quot;should be able to understand what changed by checking the diffs.&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/47c1bcdadfe4911568fd6db4f8838b194325beab"&gt;Upstream commit 47c1bcd&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/47c1bcd.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>May 15, 2026 — Phoenix model artifact re-uploaded (3.12 GB → 2.90 GB)</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/0bfc279.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/0bfc2795d308f90032544322747caacd535f75ae"/>
+    <id>tag:fitzyracing1.github.io,2026:0bfc2795d308f90032544322747caacd535f75ae</id>
+    <published>2026-05-15T21:54:59Z</published>
+    <updated>2026-05-15T21:54:59Z</updated>
+    <summary>Phoenix model artifact re-uploaded (3.12 GB → 2.90 GB)</summary>
+    <content type="html">&lt;p&gt;The only change is the Git LFS pointer for &lt;code&gt;phoenix/artifacts/oss-phoenix-artifacts.zip&lt;/code&gt;. The archive&amp;#x27;s recorded size drops from 3,123,149,995 to 2,903,518,802 bytes. No source code changed.&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/0bfc2795d308f90032544322747caacd535f75ae"&gt;Upstream commit 0bfc279&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/0bfc279.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>May 15, 2026 — May 15 release: ads blending, Grox, more sources, hydrators and filters</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/e414c17.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/e414c171ed68266341193330bc4864bf3f3534e3"/>
+    <id>tag:fitzyracing1.github.io,2026:e414c171ed68266341193330bc4864bf3f3534e3</id>
+    <published>2026-05-15T07:28:04Z</published>
+    <updated>2026-05-15T07:28:04Z</updated>
+    <summary>May 15 release: ads blending, Grox, more sources, hydrators and filters</summary>
+    <content type="html">&lt;p&gt;A large update (187 files, +18,263/−926). The upstream README gained an &amp;quot;Updates — May 15th, 2026&amp;quot; section for this release, which is no longer in the current README.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;New candidate sources&lt;/strong&gt; in &lt;code&gt;home-mixer/sources/&lt;/code&gt;: &lt;code&gt;ads_source&lt;/code&gt;, &lt;code&gt;cached_posts_source&lt;/code&gt;, &lt;code&gt;phoenix_moe_source&lt;/code&gt;, &lt;code&gt;phoenix_topics_source&lt;/code&gt;, &lt;code&gt;prompts_source&lt;/code&gt;, &lt;code&gt;push_to_home_source&lt;/code&gt;, &lt;code&gt;scored_posts_source&lt;/code&gt;, &lt;code&gt;tweet_mixer_source&lt;/code&gt; and &lt;code&gt;who_to_follow_source&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;New scorers:&lt;/strong&gt; &lt;code&gt;ranking_scorer&lt;/code&gt; and &lt;code&gt;vm_ranker&lt;/code&gt; (the original &lt;code&gt;weighted_scorer&lt;/code&gt;, &lt;code&gt;oon_scorer&lt;/code&gt; and &lt;code&gt;author_diversity_scorer&lt;/code&gt; files are still present).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;New filters:&lt;/strong&gt; &lt;code&gt;ancillary_vf_filter&lt;/code&gt;, &lt;code&gt;new_user_topic_ids_filter&lt;/code&gt;, &lt;code&gt;previously_seen_posts_backup_filter&lt;/code&gt;, &lt;code&gt;topic_ids_filter&lt;/code&gt; and &lt;code&gt;video_filter&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;New selector:&lt;/strong&gt; &lt;code&gt;blender_selector&lt;/code&gt;, plus a new &lt;code&gt;home-mixer/ads/&lt;/code&gt; module for placing ads in the feed.&lt;/li&gt;
+&lt;li&gt;Adds the &lt;code&gt;grox/&lt;/code&gt; content-understanding service (classifiers, embedders, task engine) and many new query/candidate hydrators.&lt;/li&gt;
+&lt;li&gt;Phoenix gets a single &lt;code&gt;run_pipeline.py&lt;/code&gt; entry point and a pre-trained mini model distributed through Git LFS (&lt;code&gt;phoenix/artifacts/oss-phoenix-artifacts.zip&lt;/code&gt;, about 3.1 GB).&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/e414c171ed68266341193330bc4864bf3f3534e3"&gt;Upstream commit e414c17&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/e414c17.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Jan 20, 2026 — First public commit: Thunder, Phoenix and the Rust home-mixer</title>
+    <link rel="alternate" type="text/html" href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/aaa167b.html"/>
+    <link rel="related" href="https://github.com/xai-org/x-algorithm/commit/aaa167b3de8a674587c53545a43c90eaad360010"/>
+    <id>tag:fitzyracing1.github.io,2026:aaa167b3de8a674587c53545a43c90eaad360010</id>
+    <published>2026-01-20T02:31:49Z</published>
+    <updated>2026-01-20T02:31:49Z</updated>
+    <summary>First public commit: Thunder, Phoenix and the Rust home-mixer</summary>
+    <content type="html">&lt;p&gt;The first commit in the repository&amp;#x27;s history: 79 files across &lt;code&gt;candidate-pipeline/&lt;/code&gt;, &lt;code&gt;home-mixer/&lt;/code&gt;, &lt;code&gt;phoenix/&lt;/code&gt; and &lt;code&gt;thunder/&lt;/code&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;home-mixer/&lt;/code&gt; is the service that assembles the For You feed. It ships with 12 filters (e.g. &lt;code&gt;age_filter&lt;/code&gt;, &lt;code&gt;author_socialgraph_filter&lt;/code&gt;, &lt;code&gt;muted_keyword_filter&lt;/code&gt;, &lt;code&gt;previously_seen_posts_filter&lt;/code&gt;, &lt;code&gt;vf_filter&lt;/code&gt;), two candidate sources (&lt;code&gt;thunder_source&lt;/code&gt; for in-network posts, &lt;code&gt;phoenix_source&lt;/code&gt; for out-of-network retrieval) and four scorers: &lt;code&gt;phoenix_scorer&lt;/code&gt;, &lt;code&gt;weighted_scorer&lt;/code&gt;, &lt;code&gt;author_diversity_scorer&lt;/code&gt; and &lt;code&gt;oon_scorer&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;thunder/&lt;/code&gt; holds recent posts from followed accounts in memory; &lt;code&gt;phoenix/&lt;/code&gt; contains the retrieval/ranking model code.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;candidate-pipeline/&lt;/code&gt; is the generic source → hydrate → filter → score → select framework the feed is built on.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;a href="https://github.com/xai-org/x-algorithm/commit/aaa167b3de8a674587c53545a43c90eaad360010"&gt;Upstream commit aaa167b&lt;/a&gt; · &lt;a href="https://fitzyracing1.github.io/x-algorithm-changelog/entries/aaa167b.html"&gt;Full analysis&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+</feed>

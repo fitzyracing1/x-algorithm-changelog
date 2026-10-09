@@ -1,0 +1,70 @@
+# Builds the changelog daily from xai-org/x-algorithm and deploys it to GitHub Pages.
+# Setup once: repo Settings -> Pages -> Source: "GitHub Actions".
+# Optional: add an XAI_API_KEY (or OPENAI_API_KEY) repository secret to enable LLM-written
+# summaries for commits that have no hand-written note in notes/. Without a key the
+# deterministic analysis is used.
+name: Build & deploy changelog
+
+on:
+  schedule:
+    - cron: "17 9 * * *"   # daily, 09:17 UTC (upstream usually syncs ~01:00-06:00 UTC)
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write   # only used to commit newly cached LLM summaries back to data/llm/
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate site
+        env:
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+          PROJECT_URL: ${{ github.server_url }}/${{ github.repository }}
+        run: python -m xchangelog
+
+      - name: Validate output
+        run: python scripts/validate.py site
+
+      - name: Commit cached LLM summaries (if any)
+        if: github.event_name != 'pull_request'
+        run: |
+          if [ -n "$(git status --porcelain data/llm 2>/dev/null)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/llm
+            git commit -m "Cache LLM summaries"
+            git push
+          fi
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

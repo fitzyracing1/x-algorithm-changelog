@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>x-algorithm changelog (unofficial)</title>
+<meta name="description" content="Plain-English developer notes for every update to X&#x27;s open-source recommendation algorithm.">
+<link rel="stylesheet" href="style.css">
+<link rel="alternate" type="application/atom+xml" title="x-algorithm changelog (unofficial)" href="https://fitzyracing1.github.io/x-algorithm-changelog/feed.xml">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html">x-algorithm changelog (unofficial)</a>
+  <nav><a href="index.html">Changelog</a> <a href="params.html">Params</a> <a href="feed.xml">Atom feed</a> <a href="https://github.com/xai-org/x-algorithm">Upstream</a></nav>
+</header>
+<p class="disclaimer">Unofficial, community-maintained project. Not affiliated with, endorsed by, or operated by X Corp. or xAI. Notes are generated from the public git history of <a href="https://github.com/xai-org/x-algorithm">xai-org/x-algorithm</a> and may contain mistakes; the upstream diff is the source of truth.</p>
+<main>
+<section class="intro">
+<h1>x-algorithm changelog (unofficial)</h1>
+<p>Plain-English developer notes for every sync of <a href="https://github.com/xai-org/x-algorithm">xai-org/x-algorithm</a>, the open-source
+X “For You” recommendation algorithm. Upstream commits are published by a CI agent and all carry the same message
+(<em>“Open-source X Recommendation Algorithm”</em>), so this site reads each diff and writes down what actually changed:
+new or removed filters, scorers and candidate sources, ranking-weight and parameter changes with old → new values, and new feature flags.</p>
+<p class="muted">45 entries · newest first · <a href="feed.xml">subscribe via Atom</a></p>
+</section><section class="weights"><details><summary>Current ranking-weight defaults (30)</summary>
+<p class="muted">Defaults of <code>*Weight</code> <code>param!</code>s at upstream HEAD (<code>home-mixer/params/param.rs</code> and <code>vm-ranker/params.rs</code>). These multiply the model's
+<em>predicted probabilities</em> of each action for a given viewer, not raw engagement counts (see the upstream README). Production values can be overridden by feature switches.</p>
+<div class="tw"><table class=""><thead><tr><th>Weight</th><th>home-mixer</th><th>vm-ranker</th><th>Last changed</th></tr></thead><tbody><tr><td><code>BidirectionalFollowDwellWeightBoost</code></td><td><code>0.0</code></td><td><code>0.0</code></td><td>—</td></tr><tr><td><code>BidirectionalFollowReplyWeightBoost</code></td><td><code>15.0</code></td><td><code>15.0</code></td><td>—</td></tr><tr><td><code>BlockAuthorWeight</code></td><td><code>-31.2</code></td><td><code>-31.2</code></td><td>—</td></tr><tr><td><code>ClickWeight</code></td><td><code>0.3</code></td><td><code>0.3</code></td><td><a href='entries/a707cc2.html'>Sep 29, 2026</a> (was <code>0.4</code>)</td></tr><tr><td><code>ContClickDwellTimeWeight</code></td><td><code>0.4</code></td><td><code>0.4</code></td><td><a href='entries/a707cc2.html'>Sep 29, 2026</a> (was <code>0.0</code>)</td></tr><tr><td><code>ContDwellTimeWeight</code></td><td><code>0.004</code></td><td><code>0.004</code></td><td>—</td></tr><tr><td><code>DwellWeight</code></td><td><code>0.05</code></td><td><code>0.05</code></td><td><a href='entries/0d3cdd8.html'>Aug 25, 2026</a> (was <code>0.0</code>)</td></tr><tr><td><code>FavoriteWeight</code></td><td><code>0.5</code></td><td><code>0.5</code></td><td>—</td></tr><tr><td><code>FollowAuthorWeight</code></td><td><code>4.0</code></td><td><code>4.0</code></td><td>—</td></tr><tr><td><code>MuteAuthorWeight</code></td><td><code>-58.8</code></td><td><code>-58.8</code></td><td>—</td></tr><tr><td><code>NotDwelledWeight</code></td><td><code>-0.02</code></td><td><code>-0.02</code></td><td>—</td></tr><tr><td><code>NotInterestedWeight</code></td><td><code>-47.52</code></td><td><code>-47.52</code></td><td><a href='entries/a707cc2.html'>Sep 29, 2026</a> (was <code>-43.2</code>)</td></tr><tr><td><code>OpenLinkWeight</code></td><td><code>0.2</code></td><td><code>0.2</code></td><td>—</td></tr><tr><td><code>PhotoExpandWeight</code></td><td><code>0.05</code></td><td><code>0.05</code></td><td>—</td></tr><tr><td><code>PostUnexploredWeight</code></td><td><code>0.015</code></td><td><code>0.02</code></td><td><a href='entries/78460ca.html'>Oct 7, 2026</a> (was <code>0.02</code>)</td></tr><tr><td><code>ProfileClickWeight</code></td><td><code>0.0</code></td><td><code>0.0</code></td><td>—</td></tr><tr><td><code>ProfileVisitSecsWeight</code></td><td>—</td><td><code>0.0</code></td><td>—</td></tr><tr><td><code>QuoteWeight</code></td><td><code>5.0</code></td><td><code>5.0</code></td><td>—</td></tr><tr><td><code>QuotedClickWeight</code></td><td><code>0.05</code></td><td><code>0.05</code></td><td>—</td></tr><tr><td><code>QuotedVqvWeight</code></td><td><code>0.0</code></td><td><code>0.0</code></td><td>—</td></tr><tr><td><code>ReplyWeight</code></td><td><code>5.0</code></td><td><code>5.0</code></td><td>—</td></tr><tr><td><code>ReportWeight</code></td><td><code>-234.0</code></td><td><code>-234.0</code></td><td>—</td></tr><tr><td><code>RetweetWeight</code></td><td><code>1.0</code></td><td><code>1.0</code></td><td>—</td></tr><tr><td><code>ShareViaCopyLinkWeight</code></td><td><code>20.0</code></td><td><code>20.0</code></td><td>—</td></tr><tr><td><code>ShareViaDmWeight</code></td><td><code>5.0</code></td><td><code>5.0</code></td><td>—</td></tr><tr><td><code>ShareWeight</code></td><td><code>2.0</code></td><td><code>2.0</code></td><td>—</td></tr><tr><td><code>UserVideoContinuationWeight</code></td><td>—</td><td><code>0.0</code></td><td>—</td></tr><tr><td><code>VideoContinuationWeight</code></td><td>—</td><td><code>0.0</code></td><td>—</td></tr><tr><td><code>VideoOpenWeight</code></td><td><code>0.07</code></td><td><code>0.07</code></td><td><a href='entries/0d3cdd8.html'>Aug 25, 2026</a> (was <code>0.05</code>)</td></tr><tr><td><code>VqvWeight</code></td><td><code>0.0</code></td><td><code>0.0</code></td><td><a href='entries/0d3cdd8.html'>Aug 25, 2026</a> (was <code>0.05</code>)</td></tr></tbody></table></div>
+<p><a href="params.html">Full parameter history →</a></p></details></section><article class="entry" id="cb45b55">
+  <div class="meta"><time datetime="2026-10-09T05:42:57Z">Oct 9, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/cb45b5501423126adfc508052116c2d67c0e3fec"><code>cb45b55</code></a>
+    · 16 files, +1,228/−218</div>
+  <h2><a href="entries/cb45b55.html">Code changes in phoenix/, grox/ and home-mixer/ (16 files).</a></h2>
+  <div class="tags"><span class="tag">numeric tweaks</span><span class="tag">schema</span></div>
+  <div class="summary"><ul><li>Other literal values changed in code: <code>bs_per_device</code> 256→512 (xrecsys.py) and <code>ep</code> 256→128 (xrecsys.py).</li><li>Proto/Thrift schema: 2 fields added (e.g. <code>PredictNextActionsRequest.feed_cursor_direction</code> and <code>PredictNextActionsRequest.feed_request_context</code>).</li><li>Most activity in <code>phoenix/</code> (+1,215/−217), <code>grox/</code> (+12/−0) and <code>home-mixer/</code> (+1/−1).</li><li>1 file changed only in formatting, comments or sync metadata.</li></ul></div>
+  <p class="more"><a href="entries/cb45b55.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="35650fb">
+  <div class="meta"><time datetime="2026-10-08T05:09:20Z">Oct 8, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/35650fb89f3b14dc6234312535f642779d891d88"><code>35650fb</code></a>
+    · 173 files, +15,160/−2,465</div>
+  <h2><a href="entries/35650fb.html">Vertical video carousel added to For You (off by default)</a></h2>
+  <div class="tags"><span class="tag">candidate hydrators</span><span class="tag">candidate sources</span><span class="tag">constants</span><span class="tag">filters</span><span class="tag">numeric tweaks</span><span class="tag">params</span></div>
+  <div class="summary"><ul>
+<li>New flag <code>EnableVideoCarousel</code> (default <strong>off</strong>), plus <code>VideoCarouselPosition</code> = 6 and <code>VideoCarouselFatigueMinutes</code> = 60.</li>
+<li>When enabled on a For You request, the pipeline sets aside up to <code>VIDEO_CAROUSEL_EXTRA_CANDIDATES</code> = 30 extra video candidates (top by predicted video-open). The new <code>VideoCarouselFilter</code> and <code>util/video_carousel.rs</code> then pick 3–5 non-reply videos whose aspect ratio is below 1.0 (the code&#x27;s <code>is_vertical</code> check), ordered by predicted video-open probability. No carousel is shown if fewer than 3 qualify.</li>
+<li>New <code>video_aspect_ratio_hydrator</code> supplies the aspect ratio. <code>FEED_MODULE_SLOTS</code> <code>4</code> → <code>5</code>.</li>
+<li>New <code>ads/drops.rs</code>. Large Phoenix training/model changes in the same sync.</li>
+</ul></div>
+  <p class="more"><a href="entries/35650fb.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+<article class="entry" id="78460ca">
+  <div class="meta"><time datetime="2026-10-07T03:05:56Z">Oct 7, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/78460ca8b65c57ddd3a05f9217c8aaeba214b628"><code>78460ca</code></a>
+    · 22 files, +775/−681</div>
+  <h2><a href="entries/78460ca.html">Popular-posts source turned on; post-unexplored weight 0.02 → 0.015</a></h2>
+  <div class="tags"><span class="tag">feature flags</span><span class="tag">ranking weights</span></div>
+  <div class="summary"><ul>
+<li><code>EnablePopularPostsSource</code> now <strong>on by default</strong>. The README adds it as a third out-of-network source next to Phoenix retrieval and SimClusters: &quot;a shared list of popular recent posts, initially from the most-followed active accounts.&quot;</li>
+<li><code>PostUnexploredWeight</code> <code>0.02</code> → <code>0.015</code>.</li>
+</ul></div>
+  <p class="more"><a href="entries/78460ca.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+<article class="entry" id="e62790c">
+  <div class="meta"><time datetime="2026-10-06T04:59:30Z">Oct 6, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/e62790c99484b51424c2eccc488ed4e7517e8778"><code>e62790c</code></a>
+    · 103 files, +6,916/−1,393</div>
+  <h2><a href="entries/e62790c.html">New zero-weighted heads (video continuation, profile visit time); popular posts precomputed</a></h2>
+  <div class="tags"><span class="tag">numeric tweaks</span><span class="tag">params</span><span class="tag">schema</span></div>
+  <div class="summary"><ul>
+<li><strong>New ranking weights, all at <code>0.0</code> for now:</strong> <code>VideoContinuationWeight</code>, <code>UserVideoContinuationWeight</code> and <code>ProfileVisitSecsWeight</code>, defined in <code>vm-ranker/params.rs</code>. The shared <code>xai-value-model</code> crate gets matching heads (its weight list grows from 25 to 28 entries). Home-mixer&#x27;s own <code>value_model.rs</code> hard-codes the two video-continuation weights to <code>0.0</code>, so for now these heads don&#x27;t change scores.</li>
+<li>New flag <code>PostUnexploredIncludeOutOfNetwork</code> (<code>vm-ranker/params.rs</code>, default off). Without it, the value model&#x27;s post-unexplored bonus applies only to in-network candidates.</li>
+<li><code>PopularPostsSource</code> now reads from a precomputed <code>PopularPostsCache</code> (new <code>util/popular_posts.rs</code>, filled by new <code>popular_posts_job.rs</code> / <code>popular_authors_job.rs</code>) instead of querying Thunder on each request. <code>PopularPostsTopAuthors</code>, <code>PopularPostsMaxPerAuthor</code> and <code>PopularPostsMaxRepliesRepostsPerAuthor</code> leave <code>param.rs</code>.</li>
+<li>New flags <code>EnableUnderTheHood</code> and <code>EnableHomeExcursionScores</code> (both off).</li>
+<li><code>RetrievalCandidatesKafkaMaxCandidates</code> <code>200</code> → <code>100000</code>. <code>VMRankerClusterId</code> <code>&quot;Experiment6&quot;</code> → <code>&quot;Experiment1&quot;</code>.</li>
+</ul></div>
+  <p class="more"><a href="entries/e62790c.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+<article class="entry" id="b412112">
+  <div class="meta"><time datetime="2026-10-03T03:26:56Z">Oct 3, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/b412112d03f27acbfd668e0cc040abcafa1080c1"><code>b412112</code></a>
+    · 148 files, +9,128/−2,356</div>
+  <h2><a href="entries/b412112.html">Popular-posts candidate source added (off by default); brand-safety verdict v2 back on</a></h2>
+  <div class="tags"><span class="tag">candidate hydrators</span><span class="tag">candidate sources</span><span class="tag">constants</span><span class="tag">feature flags</span><span class="tag">numeric tweaks</span><span class="tag">params</span><span class="tag">side effects</span></div>
+  <div class="summary"><ul>
+<li><strong>New candidate source <code>PopularPostsSource</code></strong> (<code>home-mixer/sources/popular_posts_source.rs</code>), behind <code>EnablePopularPostsSource</code> (default off). It fetches recent posts by popular authors (<code>PopularPostsTopAuthors</code> = 1000) from Thunder, capped at <code>PopularPostsMaxResults</code> = 500 and <code>PopularPostsMaxPerAuthor</code> = 3, with no replies or reposts (<code>PopularPostsMaxRepliesRepostsPerAuthor</code> = 0).</li>
+<li><code>EnableAdsBrandSafetyVerdictV2</code> goes back to <strong>on</strong> (it was switched off on Sep 16).</li>
+<li>New flags/params, all off or zero by default: <code>EnablePhoenixOonReplies</code>, <code>AuthorExplorationBonus</code> = 0.0, <code>EnableAdsAuthorBrandSafetyFallback</code>, <code>VMRankerSendPacingInputs</code>.</li>
+<li>New <code>phoenix_reply_ancestors_hydrator</code> and a <code>served_event_kafka</code> side effect.</li>
+<li>The README&#x27;s Brazil-filter note now reads &quot;Account list updated September 29, 2026.&quot;</li>
+</ul></div>
+  <p class="more"><a href="entries/b412112.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+<article class="entry" id="76843a5">
+  <div class="meta"><time datetime="2026-10-02T02:06:55Z">Oct 2, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/76843a5eea278ced444b21372d4e6d6909f5c35e"><code>76843a5</code></a>
+    · 105 files, +5,227/−756</div>
+  <h2><a href="entries/76843a5.html">New semantic-ID candidate source (off by default)</a></h2>
+  <div class="tags"><span class="tag">candidate sources</span><span class="tag">constants</span><span class="tag">numeric tweaks</span><span class="tag">params</span><span class="tag">schema</span></div>
+  <div class="summary"><ul>
+<li><strong>New candidate source <code>SidSource</code></strong> (<code>home-mixer/sources/sid_source.rs</code>) that retrieves posts through a new <code>SidRetrievalClient</code> (seeded with up to <code>SidSourceMaxSeeds</code> post IDs taken from the viewer&#x27;s signals via <code>post_signal_ids</code>). It is gated by <code>EnableSidSource</code> (default off) with <code>SidSourceMaxResults</code> = 800, <code>SidSourceMaxSeeds</code> = 50, <code>SidSourceMaxPerSeed</code> = 100 and <code>SidSourceMinPrefixDepth</code> = 3.</li>
+<li>Removes the <code>TestBoost</code> and <code>TestCap</code> params.</li>
+<li>Many proto/schema additions and Phoenix changes in the same sync. See the full analysis.</li>
+</ul></div>
+  <p class="more"><a href="entries/76843a5.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+<article class="entry" id="b79b947">
+  <div class="meta"><time datetime="2026-10-01T02:13:55Z">Oct 1, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/b79b947ce9283c786822274ef8fe208c33c585b2"><code>b79b947</code></a>
+    · 47 files, +2,490/−506</div>
+  <h2><a href="entries/b79b947.html">1 new config parameter and code changes in visibility-filtering/, abuse-enforcement-service/ and phoenix-rankall/.</a></h2>
+  <div class="tags"><span class="tag">numeric tweaks</span><span class="tag">params</span></div>
+  <div class="summary"><ul><li>Added 1 config parameter: <code>FeedSurveyFatigueMinutes</code> = <code>1440</code>.</li><li>Removed 1 config parameter: <code>FeedSurveyFatigueHours</code>.</li><li>Other literal values changed in code: <code>(2, failed()),</code> 1→2 (fallback_cache.rs), <code>(1, failed()),</code> 2→1 (fallback_cache.rs) and <code>fn verdict_cases() -&gt; [(Verdict, Projected); 15] {</code> 14→15 (treatment.rs).</li><li>Most activity in <code>visibility-filtering/</code> (+1,566/−300), <code>abuse-enforcement-service/</code> (+713/−150), <code>phoenix-rankall/</code> (+139/−33), <code>phoenix/</code> (+45/−11) and <code>home-mixer/</code> (+9/−11).</li></ul></div>
+  <p class="more"><a href="entries/b79b947.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="77d431a">
+  <div class="meta"><time datetime="2026-09-30T03:53:42Z">Sep 30, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/77d431aabf409ca1c1eed9bec7e2183f7c914e23"><code>77d431a</code></a>
+    · 69 files, +3,306/−1,489</div>
+  <h2><a href="entries/77d431a.html">Cold-start boost for small accounts retuned and Thompson sampling enabled</a></h2>
+  <div class="tags"><span class="tag">feature flags</span><span class="tag">lists</span><span class="tag">params</span></div>
+  <div class="summary"><p>This sync changes the defaults of the <strong>author cold-start</strong> mechanism (<code>home-mixer/scorers/author_cold_start.rs</code>). Per request, it picks one eligible fresh post from a smaller account and raises its score to whatever score sits at a fixed rank, which is index 15 given <code>ColdStartSlotMin</code> = 15 and <code>ColdStartSlotMax</code> = 16.</p>
+<ul>
+<li><code>ColdStartFollowerCap</code> <code>1000</code> → <code>50000</code>: authors with up to 50k followers are now eligible.</li>
+<li><code>ColdStartImpressionThreshold</code> <code>1000</code> → <code>200</code>: the post must have fewer than 200 Home impressions.</li>
+<li><code>ColdStartMaxPostAgeSecs</code> <code>172800</code> → <code>7200</code>: the post must be under 2 hours old (was 48h).</li>
+<li><code>LowImpressionsMaxPositionRatio</code> <code>0.85</code> → <code>0.97</code>: candidates from deeper in the ranked list can qualify.</li>
+<li><code>EnableColdStartThompsonSampling</code> now <strong>on by default</strong>. Instead of taking the highest-scored eligible post, the scorer samples a Beta(0.75 + likes, 49.25 + impressions − likes) reward per post, keeps the top <code>ColdStartTsTopK</code> (2), and boosts the higher-scored of those.</li>
+<li><code>PhoenixColdStartMaxResults</code> <code>0</code> → <code>200</code>: the Phoenix cold-start retrieval path is switched on.</li>
+<li>The Brazil election list goes from 2,786 to 2,795 accounts.</li>
+</ul></div>
+  <p class="more"><a href="entries/77d431a.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+<article class="entry" id="a707cc2">
+  <div class="meta"><time datetime="2026-09-29T03:06:30Z">Sep 29, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/a707cc27ba36d3fa79450c9cffcc48a82d080b02"><code>a707cc2</code></a>
+    · 89 files, +9,552/−2,325</div>
+  <h2><a href="entries/a707cc2.html">Ranking weights: click 0.4 → 0.3, click-dwell 0 → 0.4, not-interested −43.2 → −47.52</a></h2>
+  <div class="tags"><span class="tag">numeric tweaks</span><span class="tag">params</span><span class="tag">ranking weights</span><span class="tag">schema</span></div>
+  <div class="summary"><ul>
+<li><strong>Weight changes</strong>, made identically in <code>home-mixer/params/param.rs</code> and <code>vm-ranker/params.rs</code>: <code>ClickWeight</code> <code>0.4</code> → <code>0.3</code>. <code>ContClickDwellTimeWeight</code> <code>0.0</code> → <code>0.4</code>, so predicted time spent after clicking into a post now counts. <code>NotInterestedWeight</code> <code>-43.2</code> → <code>-47.52</code>, a 10% larger penalty.</li>
+<li><strong>Cold-start holdout:</strong> in <code>author_cold_start.rs</code> the MoE &quot;ranking policy&quot; that zeroed arm-gated retrieval candidates for non-treatment viewers is removed, along with the <code>author_policy_zeroed</code> field. Holdout viewers no longer exclude arm-gated retrieval candidates from cold-start eligibility.</li>
+<li>New flag <code>PhoenixRetrievalExcludeSeenPosts</code> (default off). When on, Phoenix retrieval is sent the viewer&#x27;s seen/served post IDs and impression bloom filters so it can skip posts already shown.</li>
+<li>The ads request now forwards the client&#x27;s seen post IDs (<code>client_seen_post_ids</code>).</li>
+<li>Removed flag: <code>UseEngagementCounterViewCountForImpressionBoost</code>.</li>
+<li>README: documents <code>abuse-ledger-service/</code>. When an enforcement is overturned on appeal, it is not re-applied for a fixed period.</li>
+</ul></div>
+  <p class="more"><a href="entries/a707cc2.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+<article class="entry" id="4c5cfe8">
+  <div class="meta"><time datetime="2026-09-26T03:39:02Z">Sep 26, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/4c5cfe8f07f1c76d4f04277e803f20e6039f5191"><code>4c5cfe8</code></a>
+    · 80 files, +9,130/−2,652</div>
+  <h2><a href="entries/4c5cfe8.html">Removed candidate hydrators safety_label_hydrator and tes_hydrator and other changes.</a></h2>
+  <div class="tags"><span class="tag">candidate hydrators</span><span class="tag">constants</span><span class="tag">numeric tweaks</span><span class="tag">schema</span></div>
+  <div class="summary"><ul><li>Removed candidate hydrators: <code>safety_label_hydrator</code> and <code>tes_hydrator</code>.</li><li>Renamed: <code>gizmoduck_hydrator</code> → <code>author</code> and <code>viewer_hydrator</code> → <code>viewer</code>.</li><li>Constants changed: <code>GEMMA_REPLY_SPAM_MIN_FOLLOWERS</code> <code>150_000</code> → <code>125_000</code> (constants.py) and <code>FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION</code> <code>100_000</code> → <code>125_000</code> (task_filter.py).</li><li>Other literal values changed in code: <code>rows</code> 14→15 (execute.rs) and <code>timeline_home_hydration</code> 10→11 (plan.rs).</li><li>Proto/Thrift schema: 18 fields added (e.g. <code>PostActionScores.action_indices</code>, <code>PostActionScores.found</code>, <code>PostActionScores.num_posts</code>, <code>PostActionScores.post_action_masks</code> and 14 more).</li><li>Most activity in <code>abuse-enforcement-service/</code> (+6,060/−7), <code>visibility-filtering/</code> (+2,177/−1,937), <code>phoenix/</code> (+811/−689), <code>home-mixer/</code> (+62/−8) and <code>grox/</code> (+20/−11).</li><li>1 file changed only in formatting, comments or sync metadata.</li></ul></div>
+  <p class="more"><a href="entries/4c5cfe8.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="bf7db1b">
+  <div class="meta"><time datetime="2026-09-25T01:56:24Z">Sep 25, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/bf7db1becb6590152fba79b8c3bf0555752f7b14"><code>bf7db1b</code></a>
+    · 87 files, +7,780/−5,759</div>
+  <h2><a href="entries/bf7db1b.html">Removed candidate hydrators conversation_control_hydrator, exclusive_content_hydrator and socialgraph_hydrator and other changes.</a></h2>
+  <div class="tags"><span class="tag">candidate hydrators</span><span class="tag">constants</span><span class="tag">lists</span><span class="tag">numeric tweaks</span><span class="tag">schema</span></div>
+  <div class="summary"><ul><li>Removed candidate hydrators: <code>conversation_control_hydrator</code>, <code>exclusive_content_hydrator</code> and <code>socialgraph_hydrator</code>.</li><li>Constants changed: <code>KEY_FRAMES_UNCONDITIONAL_FAV</code> <code>512</code> → <code>1024</code> (constants.py).</li><li>Other literal values changed in code: <code>TIMELINE_HOME_RECOMMENDATION_ONLY_RULES</code> 5→9 (registry.rs).</li><li>Static list <code>BRAZIL_2026_ELECTION_USER_IDS</code> (brazil_2026_election_filter.rs) grew from 2,776 to 2,786 entries (per its in-file test assertion).</li><li>Proto/Thrift schema: 1 field added (e.g. <code>AdInfo.unified_card_type</code>).</li><li>Most activity in <code>visibility-filtering/</code> (+6,329/−5,545), <code>grox/</code> (+534/−153), <code>under-the-hood/</code> (+616/−0), <code>phoenix/</code> (+256/−52) and <code>home-mixer/</code> (+23/−3).</li><li>1 file changed only in formatting, comments or sync metadata.</li></ul></div>
+  <p class="more"><a href="entries/bf7db1b.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="44d37eb">
+  <div class="meta"><time datetime="2026-09-24T01:53:14Z">Sep 24, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/44d37ebf87f2185b949cd37b710d410c2a77d21f"><code>44d37eb</code></a>
+    · 63 files, +2,569/−2,257</div>
+  <h2><a href="entries/44d37eb.html">Ranking scorer rewritten as a shared <code>xai-value-model</code> crate</a></h2>
+  <div class="tags"><span class="tag">constants</span><span class="tag">filters</span><span class="tag">params</span><span class="tag">schema</span><span class="tag">scorers</span></div>
+  <div class="summary"><ul>
+<li><strong><code>home-mixer/scorers/ranking_scorer.rs</code> (1,255 lines) is deleted.</strong> It&#x27;s replaced by a 114-line <code>home-mixer/scorers/value_model.rs</code> that maps feature-switch params into a <code>ValueModelWeights</code> struct and calls <code>fuse_heads</code> from a new top-level crate, <code>xai-value-model/</code> (<code>scoring.rs</code>, <code>weights.rs</code>, <code>inputs.rs</code>, …).</li>
+<li>In this version, home-mixer&#x27;s <code>weights_for</code> hard-codes <code>enable_author_diversity: false</code>, <code>oon_rescore_in_network_replies_retweets: false</code> and <code>multiplier_pre_offset: false</code>.</li>
+<li>22 params leave <code>home-mixer/params/param.rs</code>. Eleven of them (author diversity, the OON weight factors, <code>MultiplierPreOffset</code>, <code>WeightPerturbation*</code>, …) are still defined in <code>vm-ranker/params.rs</code>. The other eleven aren&#x27;t defined as params anywhere else, including <code>EnableVMRanker</code>, <code>CachedPostsReuseWeightedScore</code>, <code>EnableMultiplicativePostUnexplored</code> and the <code>VMRankerDpp*</code> settings.</li>
+<li><code>VMRankerClusterId</code> changes from <code>&quot;Experiment3&quot;</code> to <code>&quot;Experiment6&quot;</code>.</li>
+</ul></div>
+  <p class="more"><a href="entries/44d37eb.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+<article class="entry" id="1b3fec2">
+  <div class="meta"><time datetime="2026-09-23T02:19:21Z">Sep 23, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/1b3fec20bc3fd9879bc3e9f3d9c42753cdc3fede"><code>1b3fec2</code></a>
+    · 92 files, +4,993/−3,132</div>
+  <h2><a href="entries/1b3fec2.html">vm-ranker can now compute the value model itself (off by default)</a></h2>
+  <div class="tags"><span class="tag">candidate hydrators</span><span class="tag">constants</span><span class="tag">filters</span><span class="tag">numeric tweaks</span><span class="tag">params</span><span class="tag">schema</span><span class="tag">scorers</span></div>
+  <div class="summary"><ul>
+<li><strong><code>vm-ranker/</code> gets its own <code>params.rs</code></strong> with 44 <code>param!</code> defaults. These include 27 ranking weights that mirror home-mixer&#x27;s names, keys and current defaults (all of home-mixer&#x27;s weights except <code>ContActiveSecs5mResidualNormWeight</code>; e.g. <code>FavoriteWeight</code> = 0.5, <code>ReplyWeight</code> = 5.0), plus DPP settings (<code>DppEnabled</code> on, <code>DppTheta</code> = 0.65, <code>DppMaxSelectedRank</code> = 150) and author-diversity settings (<code>EnableAuthorDiversity</code> on, <code>AuthorDiversityDecay</code> = 0.5, <code>AuthorDiversityFloor</code> = 0.25).</li>
+<li>New <code>vm-ranker/scoring/value_model.rs</code> builds value-model weights from those params (<code>weights_from_params</code>). It is gated by <code>ComputeValueModel</code>, which defaults to <strong>off</strong>. New <code>ranking_config.rs</code> and <code>config_sync.rs</code> files are added alongside.</li>
+<li><strong>Home-mixer side:</strong> new <code>vm_ranker_debias_payload.rs</code> and a <code>VMRankerSendDebiasInputs</code> flag (off). <code>PhoenixMOEMaxResults</code> <code>200</code> → <code>0</code> and <code>PhoenixMoeColdStartMaxResults</code> <code>0</code> → <code>200</code>. <code>PhoenixRetrievalMOEInferenceClusterId</code> <code>&quot;Experiment3Memy04&quot;</code> → <code>&quot;Experiment2Memy04&quot;</code>.</li>
+<li>Grox: <code>GROK_GEMMA_FOLLOWER_SPLIT</code> <code>200_000</code> → <code>225_000</code>.</li>
+</ul></div>
+  <p class="more"><a href="entries/1b3fec2.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+<article class="entry" id="3aa0fa3">
+  <div class="meta"><time datetime="2026-09-22T04:11:08Z">Sep 22, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/3aa0fa336c4a20e4149b6151629b6050897bb8a5"><code>3aa0fa3</code></a>
+    · 72 files, +5,588/−2,601</div>
+  <h2><a href="entries/3aa0fa3.html">New scorer vm_ranker_request and other changes.</a></h2>
+  <div class="tags"><span class="tag">constants</span><span class="tag">numeric tweaks</span><span class="tag">params</span><span class="tag">scorers</span><span class="tag">side effects</span></div>
+  <div class="summary"><ul><li>Added 2 feature flags: <code>VMRankerComputeValueModel</code> (default off) and <code>VMRankerSendValueModelInputs</code> (default off).</li><li>Added 5 config parameters: <code>NewUserOonWeightFactor</code> = <code>0.00001</code>, <code>PhoenixMoeColdStartMaxResults</code> = <code>0</code>, <code>RetrievalCandidatesKafkaMaxCandidates</code> = <code>200</code>, <code>RetrievalCandidatesKafkaSamplePercent</code> = <code>5.0</code> and <code>SimclustersMaxCandidateAgeHours</code> = <code>48</code>.</li><li>New scorer: <code>vm_ranker_request</code>.</li><li>New side effect: <code>retrieval_candidates_kafka_side_effect</code>.</li><li>Constants changed: <code>FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION</code> <code>50000</code> → <code>80_000</code> (task_filter.py) and <code>HYDRATION_TIMEOUT</code> <code>Duration::from_millis(390)</code> → <code>Duration::from_secs(1)</code> (mod.rs).</li><li>Other literal values changed in code: <code>(4, tonic::Code::Unimplemented),</code> 82→4 (evaluate_tweets.rs) and <code>Some(&amp;2)</code> 1→2 (metrics.rs).</li><li>Most activity in <code>visibility-filtering/</code> (+2,701/−1,442), <code>phoenix/</code> (+1,371/−877), <code>home-mixer/</code> (+1,075/−234), <code>phoenix-rankall/</code> (+337/−44) and <code>grox/</code> (+104/−4).</li></ul></div>
+  <p class="more"><a href="entries/3aa0fa3.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="8b25829">
+  <div class="meta"><time datetime="2026-09-18T23:55:39Z">Sep 18, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/8b25829717a4f104dd04403ee7d0253c5fedb1b7"><code>8b25829</code></a>
+    · 41 files, +2,877/−1,828</div>
+  <h2><a href="entries/8b25829.html">&quot;Dwell regret&quot; scoring gate removed; Under the Hood shows legal withholding</a></h2>
+  <div class="tags"><span class="tag">params</span><span class="tag">scorers</span></div>
+  <div class="summary"><ul>
+<li><strong>Removed scorer <code>value_model_gate</code></strong> (537 lines). It was a per-viewer linear gate: it scored features from the viewer&#x27;s recent action sequence and compared the score to a threshold to decide whether <code>ranking_scorer</code> should use the alternative &quot;dwell regret&quot; scoring path. Inside the hysteresis band, a hash of the user ID made the call. With it go 18 params: every <code>DwellRegret*</code> alpha/negative/gate/temperature param and <code>ValueModelMode</code>. <code>ranking_scorer.rs</code> loses 465 lines and gains 12.</li>
+<li>New param <code>PhoenixColdStartMaxResults</code> (default <code>0</code>, i.e. off). <code>PhoenixRetrievalMOEInferenceClusterId</code> changes from <code>&quot;Experiment2Memy04&quot;</code> to <code>&quot;Experiment3Memy04&quot;</code>.</li>
+<li><strong>Under the Hood:</strong> the README&#x27;s &quot;September 18th, 2026&quot; note says reports now show whether an account&#x27;s or post&#x27;s visibility was limited for legal compliance (e.g. withheld in a specific country). That matches the changes to <code>UthPctdAccountTakedownEventsJob.scala</code> and <code>underTheHoodLabels.strato</code>.</li>
+<li>Visibility filtering gets a new <code>tes_composite</code> hydration path and a batch <code>evaluate_tweets</code> API.</li>
+</ul></div>
+  <p class="more"><a href="entries/8b25829.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+<article class="entry" id="c279172">
+  <div class="meta"><time datetime="2026-09-18T01:07:14Z">Sep 18, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/c279172eb8a992170f077d4c1d441923ef215d2e"><code>c279172</code></a>
+    · 30 files, +1,491/−154</div>
+  <h2><a href="entries/c279172.html">New filter task_safety_ptos_media_injected_adult_infrared_video_spam_detection_filter and other changes.</a></h2>
+  <div class="tags"><span class="tag">filters</span><span class="tag">lists</span><span class="tag">schema</span></div>
+  <div class="summary"><ul><li>New filter: <code>task_safety_ptos_media_injected_adult_infrared_video_spam_detection_filter</code>.</li><li>Static list <code>BRAZIL_2026_ELECTION_USER_IDS</code> (brazil_2026_election_filter.rs) grew from 2,707 to 2,776 entries (per its in-file test assertion).</li><li>Proto/Thrift schema: 12 fields added (e.g. <code>AdInfo.engagement_counts</code>, <code>EngagementCountRow.action</code>, <code>EngagementCountRow.counts</code>, <code>EngagementCounts.present</code> and 8 more).</li><li>Most activity in <code>phoenix/</code> (+423/−81), <code>abuse-enforcement-service/</code> (+433/−62), <code>grox/</code> (+489/−6), <code>home-mixer/</code> (+144/−5) and <code>visibility-filtering/</code> (+2/−0).</li><li>1 file changed only in formatting, comments or sync metadata.</li></ul></div>
+  <p class="more"><a href="entries/c279172.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="42266f3">
+  <div class="meta"><time datetime="2026-09-17T05:09:29Z">Sep 17, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/42266f3e2be54d8a3c4d2228aac2e8f8d1c1f034"><code>42266f3</code></a>
+    · 64 files, +2,288/−3,627</div>
+  <h2><a href="entries/42266f3.html">New filter fav_holdout_filter and other changes.</a></h2>
+  <div class="tags"><span class="tag">constants</span><span class="tag">filters</span><span class="tag">numeric tweaks</span><span class="tag">params</span></div>
+  <div class="summary"><ul><li>Parameter defaults changed: <code>ColdStartMaxPostAgeSecs</code>: <code>86400</code> → <code>172800</code>.</li><li>Added 2 feature flags: <code>EnableCdwellOnImpr</code> (default off) and <code>EnableFavHoldout</code> (default off).</li><li>Removed 1 feature flag: <code>EnableClickDwellLowFavRatePenalty</code>.</li><li>Removed 4 config parameters: <code>ClickDwellLowFavRatePenaltyAlpha</code>, <code>ClickDwellLowFavRatePenaltyBaseline</code>, <code>ClickDwellLowFavRatePenaltyCap</code> and <code>ClickDwellLowFavRatePenaltyFloor</code>.</li><li>New filters: <code>fav_holdout_filter</code> and <code>RedactUnenforcedTakedownsFilter</code>.</li><li>Constants changed: <code>GROK_GEMMA_FOLLOWER_SPLIT</code> <code>180_000</code> → <code>200_000</code> (constants.py) and <code>FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION</code> <code>30000</code> → <code>50000</code> (task_filter.py).</li><li>Other literal values changed in code: <code>reserved 234 to 252;</code> 214→234 (recsys.proto) and <code>reserved 234 to 252;</code> 214→234 (recsys.proto).</li><li>Most activity in <code>visibility-filtering/</code> (+84/−3,301), <code>under-the-hood/</code> (+1,477/−137), <code>home-mixer/</code> (+199/−112), <code>phoenix/</code> (+148/−72) and <code>takedowns/</code> (+218/−0).</li><li>1 file changed only in formatting, comments or sync metadata.</li></ul></div>
+  <p class="more"><a href="entries/42266f3.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="fad2f71">
+  <div class="meta"><time datetime="2026-09-16T01:11:22Z">Sep 16, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/fad2f71edc780ab14e4cfaebbb8b221385782e43"><code>fad2f71</code></a>
+    · 26 files, +552/−233</div>
+  <h2><a href="entries/fad2f71.html">Feature switches flipped: enable ads brand safety verdict v2 off.</a></h2>
+  <div class="tags"><span class="tag">feature flags</span></div>
+  <div class="summary"><ul><li>Feature switches flipped: <code>EnableAdsBrandSafetyVerdictV2</code> (enable ads brand safety verdict v2) is now OFF by default.</li><li>Most activity in <code>phoenix/</code> (+437/−38), <code>visibility-filtering/</code> (+53/−184), <code>grox/</code> (+38/−7), <code>abuse-enforcement-service/</code> (+20/−1) and <code>home-mixer/</code> (+4/−3).</li></ul></div>
+  <p class="more"><a href="entries/fad2f71.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="2d4a03c">
+  <div class="meta"><time datetime="2026-09-15T01:07:17Z">Sep 15, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/2d4a03c2dbfb1214571d8098077c53f4ee8a9dc1"><code>2d4a03c</code></a>
+    · 17 files, +594/−9</div>
+  <h2><a href="entries/2d4a03c.html">New side effect response_diversity_stats_side_effect and other changes.</a></h2>
+  <div class="tags"><span class="tag">constants</span><span class="tag">numeric tweaks</span><span class="tag">params</span><span class="tag">schema</span><span class="tag">side effects</span></div>
+  <div class="summary"><ul><li>Added 1 feature flag: <code>EnableResponseDiversityStatsExperimentBucket</code> (default off).</li><li>New side effect: <code>response_diversity_stats_side_effect</code>.</li><li>Constants changed: <code>metrics_export_interval_ms</code> <code>30_000</code> → <code>120_000</code> (kafkaloader.py).</li><li>Other literal values changed in code: <code>FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION</code> 10000→30000 (task_filter.py) and <code>export_interval_ms</code> 30_000→120_000 (kafkaloader.py).</li><li>Proto/Thrift schema: 4 fields added (e.g. <code>PredictNextActionsRequest.purchase_value_baselines</code>, <code>PurchaseValueBaseline.advertiser_account_id</code>, <code>PurchaseValueBaseline.impression_id</code> and <code>PurchaseValueBaseline.mean_value_usd_28d</code>).</li><li>Most activity in <code>home-mixer/</code> (+457/−5), <code>phoenix/</code> (+136/−3) and <code>grox/</code> (+1/−1).</li></ul></div>
+  <p class="more"><a href="entries/2d4a03c.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="6bb4594">
+  <div class="meta"><time datetime="2026-09-12T02:18:08Z">Sep 12, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/6bb4594253cdfa9ea19983a54a401d5ce8f8275d"><code>6bb4594</code></a>
+    · 24 files, +1,397/−338</div>
+  <h2><a href="entries/6bb4594.html">Code changes in home-mixer/, phoenix/ and visibility-filtering/ (24 files).</a></h2>
+  <div class="tags"><span class="tag">lists</span><span class="tag">schema</span></div>
+  <div class="summary"><ul><li>Static list <code>BRAZIL_2026_ELECTION_USER_IDS</code> (brazil_2026_election_filter.rs) grew from 2,554 to 2,707 entries (per its in-file test assertion).</li><li>Proto/Thrift schema: 2 fields added (e.g. <code>NextActionDistribution.requestedActionLogits</code> and <code>PredictNextActionsRequest.returnLogitsList</code>).</li><li>Most activity in <code>home-mixer/</code> (+559/−98), <code>phoenix/</code> (+311/−60), <code>visibility-filtering/</code> (+282/−68), <code>vm-ranker/</code> (+153/−41) and <code>grox/</code> (+60/−55).</li><li>1 file changed only in formatting, comments or sync metadata.</li></ul></div>
+  <p class="more"><a href="entries/6bb4594.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="fee1d0f">
+  <div class="meta"><time datetime="2026-09-10T21:39:14Z">Sep 10, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/fee1d0f3e99c25e4c10499e1aba4061c8d1cc86d"><code>fee1d0f</code></a>
+    · 33 files, +1,587/−391</div>
+  <h2><a href="entries/fee1d0f.html">Code changes in visibility-filtering/, grox/ and under-the-hood/ (33 files).</a></h2>
+  <div class="tags"><span class="tag">constants</span><span class="tag">numeric tweaks</span><span class="tag">schema</span></div>
+  <div class="summary"><ul><li>Constants changed: <code>_MOTION_REVEAL_MAX_INPUT_FRAMES</code> <code>32</code> → <code>48</code> (image.py) and <code>_MOTION_REVEAL_DENSE_SAMPLES</code> <code>32</code> → <code>48</code> (video_frames.py).</li><li>Other literal values changed in code: <code>(&quot;grpc.keepalive_timeout_ms&quot;, 20000),</code> 5000→20000 (service.py) and <code>(&quot;grpc.http2.min_ping_interval_without_data_ms&quot;, 5</code> 300000→5000 (service.py).</li><li>Proto/Thrift schema: 2 fields added (e.g. <code>UthAccountLabelAggregate.countryCodes</code> and <code>UthPostLabelAggregate.countryCodes</code>).</li><li>Most activity in <code>visibility-filtering/</code> (+1,118/−355), <code>grox/</code> (+291/−28), <code>under-the-hood/</code> (+145/−0), <code>phoenix/</code> (+27/−6) and <code>home-mixer/</code> (+6/−2).</li><li>1 file changed only in formatting, comments or sync metadata.</li></ul></div>
+  <p class="more"><a href="entries/fee1d0f.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="75d93d9">
+  <div class="meta"><time datetime="2026-09-09T20:46:07Z">Sep 9, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/75d93d9b6c7d08124173c513a727c37460ed5b04"><code>75d93d9</code></a>
+    · 28 files, +801/−252</div>
+  <h2><a href="entries/75d93d9.html">Code changes in home-mixer/, visibility-filtering-client/ and grox/ (28 files).</a></h2>
+  <div class="tags"></div>
+  <div class="summary"><ul><li>Most activity in <code>home-mixer/</code> (+452/−107), <code>visibility-filtering-client/</code> (+137/−62), <code>grox/</code> (+162/−31), <code>phoenix/</code> (+42/−8) and <code>candidate-pipeline/</code> (+3/−40).</li><li>1 file changed only in formatting, comments or sync metadata.</li></ul></div>
+  <p class="more"><a href="entries/75d93d9.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="49815da">
+  <div class="meta"><time datetime="2026-09-08T19:23:54Z">Sep 8, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/49815da255010f2468fb87b8bdd1283c2a507ca8"><code>49815da</code></a>
+    · 78 files, +10,938/−982</div>
+  <h2><a href="entries/49815da.html">New filter task_safety_ptos_adult_content_leading_frames_filter and other changes.</a></h2>
+  <div class="tags"><span class="tag">constants</span><span class="tag">filters</span><span class="tag">numeric tweaks</span><span class="tag">params</span><span class="tag">schema</span></div>
+  <div class="summary"><ul><li>Parameter defaults changed: <code>PhoenixRetrievalMOEInferenceClusterId</code>: <code>&quot;Experiment1Fou&quot;</code> → <code>&quot;Experiment2Memy04&quot;</code>.</li><li>Added 2 config parameters: <code>WeightPerturbationSalt</code> = <code>&quot;&quot;</code> and <code>WeightPerturbationSigma</code> = <code>0.0</code>.</li><li>New filter: <code>task_safety_ptos_adult_content_leading_frames_filter</code>.</li><li>Constants changed: <code>FOLLOWER_COUNT_THRESHOLD_FOR_REPLY_RANKING</code> <code>120000</code> → <code>150000</code> (task_filter.py), <code>_MOTION_REVEAL_MAX_RESIDUAL_P99</code> <code>75.0</code> → <code>100.0</code> (image.py), <code>_MOTION_REVEAL_DENSE_SAMPLES</code> <code>16</code> → <code>32</code> (video_frames.py) and <code>AOT_CACHE_VERSION</code> <code>&quot;20260705&quot;</code> → <code>&quot;20260904&quot;</code> (aot.py).</li><li>Other literal values changed in code: <code>FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION</code> 120000→150000 (task_filter.py) and <code>FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION</code> 5000→10000 (task_filter.py).</li><li>Proto/Thrift schema: 9 fields added (e.g. <code>ContentFeatures.hasPhoto</code>, <code>ContentFeatures.hasUrl</code>, <code>ContentFeatures.hasVideo</code>, <code>ContentFeatures.maxVideoDurationMs</code> and 5 more).</li><li>Most activity in <code>phoenix/</code> (+8,569/−679), <code>grox/</code> (+1,535/−74), <code>home-mixer/</code> (+574/−141), <code>candidate-pipeline/</code> (+105/−47) and <code>visibility-filtering-client/</code> (+119/−0).</li></ul></div>
+  <p class="more"><a href="entries/49815da.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="902a06f">
+  <div class="meta"><time datetime="2026-09-04T21:03:46Z">Sep 4, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/902a06fd616ed815f660e5546d16d492fa1ca825"><code>902a06f</code></a>
+    · 25 files, +480/−179</div>
+  <h2><a href="entries/902a06f.html">Code changes in home-mixer/, visibility-filtering/ and phoenix/ (25 files).</a></h2>
+  <div class="tags"><span class="tag">schema</span></div>
+  <div class="summary"><ul><li>Proto/Thrift schema: 1 field added (e.g. <code>PredictNextActionsRequest.experiment_overrides</code>).</li><li>Most activity in <code>home-mixer/</code> (+236/−75), <code>visibility-filtering/</code> (+128/−61) and <code>phoenix/</code> (+116/−43).</li><li>1 file changed only in formatting, comments or sync metadata.</li></ul></div>
+  <p class="more"><a href="entries/902a06f.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="9b0dc31">
+  <div class="meta"><time datetime="2026-09-04T00:37:40Z">Sep 4, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/9b0dc319691b76088266d0d2b48faf22d2b8a82a"><code>9b0dc31</code></a>
+    · 73 files, +1,954/−1,926</div>
+  <h2><a href="entries/9b0dc31.html">1 new config parameter and code changes in visibility-filtering/, phoenix/ and grox/.</a></h2>
+  <div class="tags"><span class="tag">constants</span><span class="tag">lists</span><span class="tag">numeric tweaks</span><span class="tag">params</span></div>
+  <div class="summary"><ul><li>Added 1 config parameter: <code>PhoenixExperimentOverrides</code> = <code>&quot;&quot;</code>.</li><li>Constants changed: <code>use_pinned_d2h</code> <code>False</code> → <code>True</code> (model_runner.py).</li><li>Other literal values changed in code: <code>FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION</code> 1000→5000 (task_filter.py), <code>input_output_aliases</code> 12→14, 13→15, 14→16 (ranker_attention_fa4.py) and <code>default</code> False→True (launch_inference.py).</li><li>Static list <code>BRAZIL_2026_ELECTION_USER_IDS</code> (brazil_2026_election_filter.rs) grew from 2,388 to 2,554 entries (per its in-file test assertion).</li><li>Most activity in <code>visibility-filtering/</code> (+560/−1,511), <code>phoenix/</code> (+425/−367), <code>grox/</code> (+504/−19), <code>home-mixer/</code> (+408/−29) and <code>abuse-enforcement-service/</code> (+57/−0).</li></ul></div>
+  <p class="more"><a href="entries/9b0dc31.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="e4dcedd">
+  <div class="meta"><time datetime="2026-09-03T16:28:53-04:00">Sep 3, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/e4dcedd3b2db8b7a9cc244c2b616d04a0ee2c353"><code>e4dcedd</code></a>
+    · 1 files, +2/−0 · merge</div>
+  <h2><a href="entries/e4dcedd.html">Community PR #88 merged: dedupe in-network IDs before visibility lookup</a></h2>
+  <div class="tags"></div>
+  <div class="summary"><p>Merge of <a href="https://github.com/xai-org/x-algorithm/pull/88">PR #88</a> from <code>joshs1017dev</code>. <code>VFCandidateHydrator</code> now sorts and dedups <code>in_network_ids</code> (<code>sort_unstable()</code> + <code>dedup()</code>) before calling visibility filtering, so duplicate IDs aren&#x27;t looked up twice. Two lines changed. This is the only commit in the history from an outside contributor.</p></div>
+  <p class="more"><a href="entries/e4dcedd.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+<article class="entry" id="85ac72a">
+  <div class="meta"><time datetime="2026-09-02T19:46:48Z">Sep 2, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/85ac72a1bba41f21615e3f0bca56da75970a6633"><code>85ac72a</code></a>
+    · 34 files, +1,081/−525</div>
+  <h2><a href="entries/85ac72a.html">Parameter changes: phoenix retrieval aggregation type &quot;DENSE_WITH_SHORT_DWELL&quot;→&quot;DENSE_WITH_LONG_DWELL&quot;.</a></h2>
+  <div class="tags"><span class="tag">numeric tweaks</span><span class="tag">params</span><span class="tag">schema</span></div>
+  <div class="summary"><ul><li>Parameter defaults changed: <code>PhoenixRetrievalAggregationType</code>: <code>&quot;DENSE_WITH_SHORT_DWELL&quot;</code> → <code>&quot;DENSE_WITH_LONG_DWELL&quot;</code>.</li><li>Other literal values changed in code: <code>qk_norm</code> False→True (xrecsys_two_tower.py) and <code>attn_logit_cap</code> 80.0→-1 (xrecsys_two_tower.py).</li><li>Proto/Thrift schema: 3 fields added (e.g. <code>NextActionDistribution.backboneContinuousValues</code>, <code>NextActionDistribution.backboneTopLogProbs</code> and <code>PredictNextActionsRequest.returnBackboneScores</code>).</li><li>Most activity in <code>visibility-filtering/</code> (+392/−426), <code>phoenix/</code> (+338/−93), <code>scarecrow/</code> (+333/−0), <code>home-mixer/</code> (+16/−4) and <code>grox/</code> (+2/−2).</li></ul></div>
+  <p class="more"><a href="entries/85ac72a.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="7ba7768">
+  <div class="meta"><time datetime="2026-09-01T20:47:22Z">Sep 1, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/7ba776848b12d8422eb0f291ee03ea5c17ab0188"><code>7ba7768</code></a>
+    · 34 files, +2,964/−2,861</div>
+  <h2><a href="entries/7ba7768.html">Ads blender switched to &quot;multi_risk&quot;</a></h2>
+  <div class="tags"><span class="tag">params</span><span class="tag">schema</span></div>
+  <div class="summary"><p><code>AdsBlenderType</code> (feature switch <code>rust_home_mixer_ads_blender</code>) changes from <code>&quot;partition_organic_low_risk&quot;</code> to <code>&quot;multi_risk&quot;</code>. That makes the multi-risk blender added on Aug 28 the default for placing ads in the feed. Apart from home-mixer, this sync mostly touches <code>visibility-filtering/rules/</code>, <code>phoenix/</code> and <code>grox/</code>.</p></div>
+  <p class="more"><a href="entries/7ba7768.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+<article class="entry" id="6384ca7">
+  <div class="meta"><time datetime="2026-09-01T00:11:04Z">Sep 1, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/6384ca7d2c8570fbc645c20c3291730739ac00ce"><code>6384ca7</code></a>
+    · 70 files, +2,247/−735</div>
+  <h2><a href="entries/6384ca7.html">New filter task_safety_ptos_special_video_filter and other changes.</a></h2>
+  <div class="tags"><span class="tag">filters</span><span class="tag">lists</span><span class="tag">params</span><span class="tag">schema</span></div>
+  <div class="summary"><ul><li>Added 1 feature flag: <code>EnablePhoenixScoreStatsExperimentBucket</code> (default off).</li><li>New filter: <code>task_safety_ptos_special_video_filter</code>.</li><li>Static list <code>BRAZIL_2026_ELECTION_USER_IDS</code> (brazil_2026_election_filter.rs) grew from 2,315 to 2,388 entries (per its in-file test assertion).</li><li>Proto/Thrift schema: 8 fields added (e.g. <code>CandidateDistributionSet.pageDecodeResult</code>, <code>PageDecodeParams.poolN</code>, <code>PageDecodeParams.steps</code>, <code>PageDecodeParams.temperature</code> and 4 more).</li><li>Most activity in <code>visibility-filtering/</code> (+680/−203), <code>phoenix/</code> (+438/−189), <code>grox/</code> (+479/−19), <code>home-mixer/</code> (+313/−94) and <code>abuse-enforcement-service/</code> (+104/−173).</li><li>3 files changed only in formatting, comments or sync metadata.</li></ul></div>
+  <p class="more"><a href="entries/6384ca7.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="bc8e5f0">
+  <div class="meta"><time datetime="2026-08-28T22:37:32Z">Aug 28, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/bc8e5f0f07b31337bfdcaf690121498e00199b64"><code>bc8e5f0</code></a>
+    · 24 files, +1,950/−1,175</div>
+  <h2><a href="entries/bc8e5f0.html">1 new config parameter and code changes in visibility-filtering/, phoenix/ and home-mixer/.</a></h2>
+  <div class="tags"><span class="tag">params</span></div>
+  <div class="summary"><ul><li>Added 1 config parameter: <code>RerankerHeadTag</code> = <code>0</code>.</li><li>Most activity in <code>visibility-filtering/</code> (+1,825/−1,144), <code>phoenix/</code> (+112/−27), <code>home-mixer/</code> (+12/−3) and <code>(repo root)</code> (+1/−1).</li></ul></div>
+  <p class="more"><a href="entries/bc8e5f0.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="24c6094">
+  <div class="meta"><time datetime="2026-08-28T01:00:41Z">Aug 28, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/24c60942c5c5fdad3a6addffb4c6e6d2f228f04f"><code>24c6094</code></a>
+    · 41 files, +2,071/−265</div>
+  <h2><a href="entries/24c6094.html">New &quot;multi-risk&quot; ads blender</a></h2>
+  <div class="tags"><span class="tag">ads blenders</span><span class="tag">constants</span><span class="tag">lists</span></div>
+  <div class="summary"><ul>
+<li><strong>New <code>MultiRiskAdsBlender</code></strong> (<code>home-mixer/ads/multi_risk_blender.rs</code>). It places ads by the brand-safety verdict of the surrounding organic posts. It counts safe, medium-risk and high-risk posts, caps ad slots at half the safe posts (and half the medium-risk posts for the medium path), keeps the requested ad spacing, and records stats when ads can&#x27;t be served (<code>no_ads</code>, <code>too_few_posts</code>, …). This commit doesn&#x27;t make it the default (see Sep 1).</li>
+<li><code>viewer_muted_keyword_filter</code> and the <code>response_stats</code> side effect get small additions, and a <code>strato_context</code> helper is added.</li>
+<li>The Brazil election list changes from 2,328 to 2,315 accounts.</li>
+</ul></div>
+  <p class="more"><a href="entries/24c6094.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+<article class="entry" id="45b48ba">
+  <div class="meta"><time datetime="2026-08-26T20:04:12Z">Aug 26, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/45b48ba6baa40e212f6dcbaf8fe9fdc8d9da722e"><code>45b48ba</code></a>
+    · 36 files, +873/−525</div>
+  <h2><a href="entries/45b48ba.html">Code changes in phoenix/, visibility-filtering/ and grox/ (36 files).</a></h2>
+  <div class="tags"><span class="tag">schema</span></div>
+  <div class="summary"><ul><li>Proto/Thrift schema: 4 fields added (e.g. <code>ConvAssetIds.asset_id</code>, <code>ConvAssetIds.author_id</code>, <code>ConvAssetIds.impressed_time_ms</code> and <code>PredictNextActionsRequest.conv_asset_ids</code>).</li><li>Most activity in <code>phoenix/</code> (+744/−172), <code>visibility-filtering/</code> (+47/−341), <code>grox/</code> (+73/−11) and <code>home-mixer/</code> (+9/−1).</li><li>1 file changed only in formatting, comments or sync metadata.</li></ul></div>
+  <p class="more"><a href="entries/45b48ba.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="0d3cdd8">
+  <div class="meta"><time datetime="2026-08-25T23:20:04Z">Aug 25, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/0d3cdd806c405f04db7030f720b48687aa304061"><code>0d3cdd8</code></a>
+    · 47 files, +5,850/−586</div>
+  <h2><a href="entries/0d3cdd8.html">Ranking weights: dwell 0 → 0.05, video open 0.05 → 0.07, VQV 0.05 → 0</a></h2>
+  <div class="tags"><span class="tag">candidate hydrators</span><span class="tag">constants</span><span class="tag">feature flags</span><span class="tag">lists</span><span class="tag">numeric tweaks</span><span class="tag">params</span><span class="tag">ranking weights</span></div>
+  <div class="summary"><ul>
+<li><strong>Weight changes</strong> in <code>home-mixer/params/param.rs</code>: <code>DwellWeight</code> <code>0.0</code> → <code>0.05</code>, <code>VideoOpenWeight</code> <code>0.05</code> → <code>0.07</code>, <code>VqvWeight</code> (video quality view) <code>0.05</code> → <code>0.0</code>.</li>
+<li><code>PhoenixAggregationType</code> default goes from <code>&quot;DENSE_WITH_SHORT_DWELL&quot;</code> to <code>&quot;DENSE_WITH_LONG_DWELL&quot;</code>, and the shadow-traffic cluster list <code>ShadowTrafficPhoenixClusterRates</code> is emptied.</li>
+<li><code>EnableAdsBrandSafetyVerdictV2</code> is now on by default. <code>ColdStartTsTopK</code> drops from 5 to 2.</li>
+<li>Removed params: <code>UseServedSlateContext</code>, <code>VMRankerValueModelId</code>, <code>VMRankerSendHeadWeights</code>. <code>EnableMpnScoring</code> is replaced by a new <code>MultiplierPreOffset</code> flag. <code>ranking_scorer.rs</code> is reworked: the per-candidate <code>effective_head_weights</code> function is removed and the author-diversity code is restructured.</li>
+<li>The author cold-start scorer now uses <code>view_count_on_home</code> (impressions on Home) instead of the overall <code>view_count</code>.</li>
+<li>New <code>following_blocked_by_hydrator</code> flags retweets and quotes whose original author blocks the viewer.</li>
+<li>The Brazil election list grows from 665 to 2,328 accounts, and the README adds an &quot;Account list updated&quot; note.</li>
+</ul></div>
+  <p class="more"><a href="entries/0d3cdd8.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+<article class="entry" id="d011592">
+  <div class="meta"><time datetime="2026-08-24T18:51:34Z">Aug 24, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/d011592a1c8c4bfb23781ff15577a68dc08bdde1"><code>d011592</code></a>
+    · 19 files, +1,418/−117</div>
+  <h2><a href="entries/d011592.html">Code changes in visibility-filtering/, grox/ and phoenix/ (19 files).</a></h2>
+  <div class="tags"><span class="tag">constants</span><span class="tag">numeric tweaks</span></div>
+  <div class="summary"><ul><li>Constants changed: <code>FOLLOWER_COUNT_THRESHOLD_FOR_REPLY_RANKING</code> <code>80000</code> → <code>100000</code> (task_filter.py).</li><li>Other literal values changed in code: <code>FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION</code> 80000→100000 (task_filter.py).</li><li>Most activity in <code>visibility-filtering/</code> (+906/−6), <code>grox/</code> (+294/−56), <code>phoenix/</code> (+178/−36) and <code>home-mixer/</code> (+40/−19).</li></ul></div>
+  <p class="more"><a href="entries/d011592.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="28e414f">
+  <div class="meta"><time datetime="2026-08-21T19:10:38Z">Aug 21, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/28e414f535e4b5a50ca12ee87674e7649e50c7ad"><code>28e414f</code></a>
+    · 35 files, +856/−152</div>
+  <h2><a href="entries/28e414f.html">Code changes in phoenix/, grox/ and visibility-filtering/ (35 files).</a></h2>
+  <div class="tags"><span class="tag">constants</span><span class="tag">numeric tweaks</span><span class="tag">schema</span></div>
+  <div class="summary"><ul><li>Constants changed: <code>FOLLOWER_COUNT_THRESHOLD_FOR_REPLY_RANKING</code> <code>60000</code> → <code>80000</code> (task_filter.py).</li><li>Other literal values changed in code: <code>mode</code> 4.5→4.6 (classifier.py) and <code>FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION</code> 60000→80000 (task_filter.py).</li><li>Proto/Thrift schema: 1 field added (e.g. <code>NextActionDistribution.slateContext</code>).</li><li>Most activity in <code>phoenix/</code> (+835/−79), <code>grox/</code> (+8/−66) and <code>visibility-filtering/</code> (+13/−7).</li></ul></div>
+  <p class="more"><a href="entries/28e414f.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="d0cef2f">
+  <div class="meta"><time datetime="2026-08-20T20:22:58Z">Aug 20, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/d0cef2f943084ee0d4310378031c9c2c37d67f12"><code>d0cef2f</code></a>
+    · 14 files, +479/−200</div>
+  <h2><a href="entries/d0cef2f.html">New candidate hydrator ai_trend_feedback_context_hydrator and other changes.</a></h2>
+  <div class="tags"><span class="tag">candidate hydrators</span><span class="tag">constants</span><span class="tag">params</span></div>
+  <div class="summary"><ul><li>Added 2 feature flags: <code>EnableAiTrendFeedbackContext</code> (default off) and <code>UseServedSlateContext</code> (default off).</li><li>New candidate hydrator: <code>ai_trend_feedback_context_hydrator</code>.</li><li>Constants changed: <code>_GROK_4_6_INTERNAL_DIAL</code> <code>0.1</code> → <code>0.3</code> (classifier.py).</li><li>Most activity in <code>phoenix/</code> (+189/−169), <code>home-mixer/</code> (+255/−17) and <code>grox/</code> (+35/−14).</li></ul></div>
+  <p class="more"><a href="entries/d0cef2f.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="aad7179">
+  <div class="meta"><time datetime="2026-08-19T21:25:42Z">Aug 19, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/aad7179773944e17eb8798bbbf0231d6cd6c1ffc"><code>aad7179</code></a>
+    · 79 files, +3,303/−651</div>
+  <h2><a href="entries/aad7179.html">New filter following_viewer_muted_keyword_filter and other changes.</a></h2>
+  <div class="tags"><span class="tag">candidate hydrators</span><span class="tag">constants</span><span class="tag">filters</span><span class="tag">numeric tweaks</span><span class="tag">schema</span></div>
+  <div class="summary"><ul><li>New candidate hydrator: <code>quoted_post_text_hydrator</code>.</li><li>New filter: <code>following_viewer_muted_keyword_filter</code>.</li><li>Renamed: <code>muted_keyword_filter</code> → <code>viewer_muted_keyword_filter</code>.</li><li>Constants changed: <code>MULTIPART_PART_SIZE</code> <code>16 * 1024 * 1024</code> → <code>32 * 1024 * 1024</code> (checkpoint_store.rs).</li><li>Other literal values changed in code: <code>mode</code> 4.5→4.6 (classifier.py), <code>learning_rate</code> 1e-3→7.1e-4 (xrecsys.py), <code>static_assert(sizeof(UpdateScalars) == 4 * sizeof(</code> 3→4 (async_emb_kernel.hpp), <code>input_output_aliases</code> 12→14, 13→15, 14→16 (ranker_attention_varlen_fa4.py), <code>input_output_aliases</code> 12→14 (ranker_attention_varlen_fa4.py) and 2 more.</li><li>Proto/Thrift schema: 8 fields added (e.g. <code>FetchAggregatedUserActionRequests.feature_switch_overrides</code>, <code>NextActionDistribution.rewardOutputs</code>, <code>RewardOutputs.policyLogits</code>, <code>RewardOutputs.values</code> and 4 more).</li><li>Most activity in <code>phoenix/</code> (+2,811/−536), <code>home-mixer/</code> (+222/−25), <code>grox/</code> (+146/−88) and <code>visibility-filtering/</code> (+124/−2).</li></ul></div>
+  <p class="more"><a href="entries/aad7179.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="11a71f8">
+  <div class="meta"><time datetime="2026-08-18T18:57:00Z">Aug 18, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/11a71f87d6a7fc4c1e8159dad8f3c5ff90a0f7ed"><code>11a71f8</code></a>
+    · 14 files, +208/−70</div>
+  <h2><a href="entries/11a71f8.html">New candidate hydrator vf_following_candidate_hydrator and other changes.</a></h2>
+  <div class="tags"><span class="tag">candidate hydrators</span><span class="tag">constants</span><span class="tag">numeric tweaks</span></div>
+  <div class="summary"><ul><li>New candidate hydrator: <code>vf_following_candidate_hydrator</code>.</li><li>Constants changed: <code>FOLLOWER_COUNT_THRESHOLD_FOR_REPLY_RANKING</code> <code>40000</code> → <code>60000</code> (task_filter.py).</li><li>Other literal values changed in code: <code>FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION</code> 40000→60000 (task_filter.py), <code>counts.get(&amp;(1, pb::ServedType::ForYouPhoenixRetri</code> 10→1 (author_cold_start.rs) and <code>counts.get(&amp;(2, pb::ServedType::ForYouPhoenixRetri</code> 10→2 (author_cold_start.rs).</li><li>Most activity in <code>home-mixer/</code> (+185/−42), <code>grox/</code> (+8/−19), <code>phoenix-rankall-strato/</code> (+12/−9) and <code>visibility-filtering/</code> (+3/−0).</li></ul></div>
+  <p class="more"><a href="entries/11a71f8.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="b089ce6">
+  <div class="meta"><time datetime="2026-08-17T20:20:07Z">Aug 17, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/b089ce64891f9c50fab73aa00dbe65acb82f198f"><code>b089ce6</code></a>
+    · 34 files, +751/−162</div>
+  <h2><a href="entries/b089ce6.html">1 new config parameter and code changes in grox/, home-mixer/ and bdsm/.</a></h2>
+  <div class="tags"><span class="tag">constants</span><span class="tag">numeric tweaks</span><span class="tag">params</span></div>
+  <div class="summary"><ul><li>Added 1 feature flag: <code>EnableAdsBrandSafetyVerdictV2</code> (default off).</li><li>Constants changed: <code>min_actions_for_enforcement</code> <code>30</code> → <code>999999</code> (score_results_sink_focal.py), <code>FOLLOWER_COUNT_THRESHOLD_FOR_REPLY_RANKING</code> <code>30000</code> → <code>40000</code> (task_filter.py) and <code>FOLLOWING_MAX_RESULT_SIZE</code> <code>100</code> → <code>110</code> (config.rs).</li><li>Other literal values changed in code: <code>version</code> 13→14 (sink_policy.yaml), <code>min_actions_for_enforcement</code> 30→999999 (sink_policy.yaml), <code>2026-08-14: enforcement policy for the 8-head beha</code> 13→14 (sink_policy.yaml) and <code>FOLLOWER_COUNT_THRESHOLD_FOR_SPAM_DETECTION</code> 30000→40000 (task_filter.py).</li><li>Most activity in <code>grox/</code> (+375/−57), <code>home-mixer/</code> (+276/−15), <code>bdsm/</code> (+58/−33), <code>phoenix-rankall-strato/</code> (+35/−44) and <code>phoenix/</code> (+5/−13).</li></ul></div>
+  <p class="more"><a href="entries/b089ce6.html">Full analysis →</a> <span class="src">Summary: automatic analysis</span></p>
+</article>
+<article class="entry" id="c65aa17">
+  <div class="meta"><time datetime="2026-08-14T20:55:37Z">Aug 14, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/c65aa179db7bdd61e2c2821eac87f208a105c053"><code>c65aa17</code></a>
+    · 21 files, +2,271/−32</div>
+  <h2><a href="entries/c65aa17.html">Brazil 2026 election filter; Thompson-sampling params for author cold start</a></h2>
+  <div class="tags"><span class="tag">constants</span><span class="tag">filters</span><span class="tag">numeric tweaks</span><span class="tag">params</span></div>
+  <div class="summary"><ul>
+<li><strong>New filter <code>Brazil2026ElectionFilter</code></strong> (<code>home-mixer/filters/brazil_2026_election_filter.rs</code>). It removes a candidate when its author, the retweeted author, the quoted author, or any author in the reply&#x27;s ancestor chain is on a hard-coded list of accounts reported to Brazil&#x27;s Electoral Court, <strong>unless the viewer follows that account</strong>. The list starts with 665 user IDs, and code comments cite the TSE open-data candidate dataset. The upstream README&#x27;s &quot;August 14th, 2026&quot; notes describe the same filter.</li>
+<li><strong>Author cold start:</strong> new params <code>EnableColdStartThompsonSampling</code> (default off), <code>ColdStartBetaAlpha0</code> = 0.75, <code>ColdStartBetaBeta0</code> = 49.25, <code>ColdStartTsTopK</code> = 5, <code>ColdStartImpressionScale</code> = 1.0 and <code>ColdStartTrackedIds</code>. These let the cold-start boost choose among eligible low-impression posts by sampling a Beta posterior of likes per impression, rather than taking the highest-scored one.</li>
+<li>Comments added to <code>home-mixer/params/param.rs</code> explain that each weight multiplies the *predicted* probability of an action, not raw engagement counts. The README is restructured into a &quot;Latest Updates&quot; list with an August 14th entry.</li>
+</ul></div>
+  <p class="more"><a href="entries/c65aa17.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+<article class="entry" id="a389166">
+  <div class="meta"><time datetime="2026-08-13T17:23:56Z">Aug 13, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/a389166f6cf5da70a286b568c87695d4dcdce3a1"><code>a389166</code></a>
+    · 1 files, +0/−2</div>
+  <h2><a href="entries/a389166.html">.gitattributes removed (Git LFS tracking for *.npz and *.zip)</a></h2>
+  <div class="tags"></div>
+  <div class="summary"><p>Deletes the two-line <code>.gitattributes</code> that routed <code>*.npz</code> and <code>*.zip</code> files through Git LFS. No algorithm code changed.</p></div>
+  <p class="more"><a href="entries/a389166.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+<article class="entry" id="47c1bcd">
+  <div class="meta"><time datetime="2026-08-13T17:09:58Z">Aug 13, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/47c1bcdadfe4911568fd6db4f8838b194325beab"><code>47c1bcd</code></a>
+    · 2,053 files, +363,246/−11,640</div>
+  <h2><a href="entries/47c1bcd.html">Aug 13 release: ranking parameters, visibility filtering, labelers, Phoenix training code</a></h2>
+  <div class="tags"><span class="tag">ads blenders</span><span class="tag">artifacts</span><span class="tag">botmaker rules</span><span class="tag">candidate hydrators</span><span class="tag">candidate sources</span><span class="tag">constants</span><span class="tag">filters</span><span class="tag">numeric tweaks</span><span class="tag">params</span><span class="tag">scorers</span><span class="tag">selectors</span><span class="tag">side effects</span></div>
+  <div class="summary"><p>The biggest drop in the repo&#x27;s history (2,053 files, +363,246/−11,640). The upstream README&#x27;s &quot;August 13th, 2026&quot; notes cover it.</p>
+<ul>
+<li><strong>Ranking configuration is now public.</strong> <code>home-mixer/params/param.rs</code> appears with 189 <code>param!</code> feature-switch defaults, including the action weights that blend predicted engagement probabilities into one score (for example <code>ReplyWeight</code>, <code>ShareViaCopyLinkWeight</code> and the negative <code>ReportWeight</code>/<code>BlockAuthorWeight</code>). See the parameter tracker on this site for how they&#x27;ve changed since.</li>
+<li><strong>Visibility filtering:</strong> <code>visibility-filtering/</code> decides whether a post is shown, dropped, or shown behind an interstitial.</li>
+<li><strong>The systems that produce the labels it reads:</strong> rule engines (<code>botmaker/</code>, <code>botmaker-rules/</code>, <code>scarecrow/</code>), account-scoring models (<code>agatha/</code>, <code>bdsm/</code>, <code>user-cred-v2/</code>), media models (<code>media-model-proxy/</code>, <code>clip/</code>) and enforcement (<code>abuse-enforcement-service/</code>).</li>
+<li><strong>Phoenix:</strong> the demo model is replaced by the training code plus synthetic data generation.</li>
+<li><strong>SimClusters</strong> (<code>simclusters/</code>) is added as another out-of-network candidate source, alongside Thunder and Phoenix retrieval.</li>
+<li>New home-mixer filters include <code>ad_adjacent_served_filter</code>, <code>following_retweet_deduplication_filter</code>, <code>self_reply_chain_filter</code> and <code>oon_nsfw_simclusters_filter</code>. See the full analysis for the complete list.</li>
+<li><strong><code>docs/BIDIRECTIONAL_BOOST_CHANGE.md</code></strong> is a worked example of a changelog. It walks through the July 2026 rollout of the bidirectional-follow reply boost (A/B tested at 5/10/15/20 from July 10, broadly launched at 20 on July 13, set to 15 on July 24) and says future updates will be published to the repo so readers &quot;should be able to understand what changed by checking the diffs.&quot;</li>
+</ul></div>
+  <p class="more"><a href="entries/47c1bcd.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+<article class="entry" id="0bfc279">
+  <div class="meta"><time datetime="2026-05-15T21:54:59Z">May 15, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/0bfc2795d308f90032544322747caacd535f75ae"><code>0bfc279</code></a>
+    · 1 files, +2/−2</div>
+  <h2><a href="entries/0bfc279.html">Phoenix model artifact re-uploaded (3.12 GB → 2.90 GB)</a></h2>
+  <div class="tags"><span class="tag">artifacts</span></div>
+  <div class="summary"><p>The only change is the Git LFS pointer for <code>phoenix/artifacts/oss-phoenix-artifacts.zip</code>. The archive&#x27;s recorded size drops from 3,123,149,995 to 2,903,518,802 bytes. No source code changed.</p></div>
+  <p class="more"><a href="entries/0bfc279.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+<article class="entry" id="e414c17">
+  <div class="meta"><time datetime="2026-05-15T07:28:04Z">May 15, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/e414c171ed68266341193330bc4864bf3f3534e3"><code>e414c17</code></a>
+    · 187 files, +18,263/−926</div>
+  <h2><a href="entries/e414c17.html">May 15 release: ads blending, Grox, more sources, hydrators and filters</a></h2>
+  <div class="tags"><span class="tag">ads blenders</span><span class="tag">artifacts</span><span class="tag">candidate hydrators</span><span class="tag">candidate sources</span><span class="tag">filters</span><span class="tag">numeric tweaks</span><span class="tag">scorers</span><span class="tag">selectors</span><span class="tag">side effects</span></div>
+  <div class="summary"><p>A large update (187 files, +18,263/−926). The upstream README gained an &quot;Updates — May 15th, 2026&quot; section for this release, which is no longer in the current README.</p>
+<ul>
+<li><strong>New candidate sources</strong> in <code>home-mixer/sources/</code>: <code>ads_source</code>, <code>cached_posts_source</code>, <code>phoenix_moe_source</code>, <code>phoenix_topics_source</code>, <code>prompts_source</code>, <code>push_to_home_source</code>, <code>scored_posts_source</code>, <code>tweet_mixer_source</code> and <code>who_to_follow_source</code>.</li>
+<li><strong>New scorers:</strong> <code>ranking_scorer</code> and <code>vm_ranker</code> (the original <code>weighted_scorer</code>, <code>oon_scorer</code> and <code>author_diversity_scorer</code> files are still present).</li>
+<li><strong>New filters:</strong> <code>ancillary_vf_filter</code>, <code>new_user_topic_ids_filter</code>, <code>previously_seen_posts_backup_filter</code>, <code>topic_ids_filter</code> and <code>video_filter</code>.</li>
+<li><strong>New selector:</strong> <code>blender_selector</code>, plus a new <code>home-mixer/ads/</code> module for placing ads in the feed.</li>
+<li>Adds the <code>grox/</code> content-understanding service (classifiers, embedders, task engine) and many new query/candidate hydrators.</li>
+<li>Phoenix gets a single <code>run_pipeline.py</code> entry point and a pre-trained mini model distributed through Git LFS (<code>phoenix/artifacts/oss-phoenix-artifacts.zip</code>, about 3.1 GB).</li>
+</ul></div>
+  <p class="more"><a href="entries/e414c17.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+<article class="entry" id="aaa167b">
+  <div class="meta"><time datetime="2026-01-20T02:31:49Z">Jan 20, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/aaa167b3de8a674587c53545a43c90eaad360010"><code>aaa167b</code></a>
+    · 79 files, +8,816/−0</div>
+  <h2><a href="entries/aaa167b.html">First public commit: Thunder, Phoenix and the Rust home-mixer</a></h2>
+  <div class="tags"><span class="tag">candidate hydrators</span><span class="tag">candidate sources</span><span class="tag">filters</span><span class="tag">scorers</span><span class="tag">selectors</span><span class="tag">side effects</span></div>
+  <div class="summary"><p>The first commit in the repository&#x27;s history: 79 files across <code>candidate-pipeline/</code>, <code>home-mixer/</code>, <code>phoenix/</code> and <code>thunder/</code>.</p>
+<ul>
+<li><code>home-mixer/</code> is the service that assembles the For You feed. It ships with 12 filters (e.g. <code>age_filter</code>, <code>author_socialgraph_filter</code>, <code>muted_keyword_filter</code>, <code>previously_seen_posts_filter</code>, <code>vf_filter</code>), two candidate sources (<code>thunder_source</code> for in-network posts, <code>phoenix_source</code> for out-of-network retrieval) and four scorers: <code>phoenix_scorer</code>, <code>weighted_scorer</code>, <code>author_diversity_scorer</code> and <code>oon_scorer</code>.</li>
+<li><code>thunder/</code> holds recent posts from followed accounts in memory; <code>phoenix/</code> contains the retrieval/ranking model code.</li>
+<li><code>candidate-pipeline/</code> is the generic source → hydrate → filter → score → select framework the feed is built on.</li>
+</ul></div>
+  <p class="more"><a href="entries/aaa167b.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+</main>
+<footer>
+  <p>Unofficial, community-maintained project. Not affiliated with, endorsed by, or operated by X Corp. or xAI. Notes are generated from the public git history of <a href="https://github.com/xai-org/x-algorithm">xai-org/x-algorithm</a> and may contain mistakes; the upstream diff is the source of truth.</p>
+  <p>Generated 2026-10-09 22:44 UTC from upstream <a href="https://github.com/xai-org/x-algorithm/commit/cb45b5501423126adfc508052116c2d67c0e3fec"><code>cb45b55</code></a>.
+  Source for this site: <a href="https://github.com/fitzyracing1/x-algorithm-changelog">fitzyracing1/x-algorithm-changelog</a>.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sep 3, 2026: Community PR #88 merged: dedupe in-network IDs before visibility lookup · x-algorithm changelog</title>
+<meta name="description" content="Sep 3, 2026: Community PR #88 merged: dedupe in-network IDs before visibility lookup">
+<link rel="stylesheet" href="../style.css">
+<link rel="alternate" type="application/atom+xml" title="x-algorithm changelog (unofficial)" href="https://fitzyracing1.github.io/x-algorithm-changelog/feed.xml">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="../index.html">x-algorithm changelog (unofficial)</a>
+  <nav><a href="../index.html">Changelog</a> <a href="../params.html">Params</a> <a href="../feed.xml">Atom feed</a> <a href="https://github.com/xai-org/x-algorithm">Upstream</a></nav>
+</header>
+<p class="disclaimer">Unofficial, community-maintained project. Not affiliated with, endorsed by, or operated by X Corp. or xAI. Notes are generated from the public git history of <a href="https://github.com/xai-org/x-algorithm">xai-org/x-algorithm</a> and may contain mistakes; the upstream diff is the source of truth.</p>
+<main>
+<article class="entry" id="e4dcedd">
+  <div class="meta"><time datetime="2026-09-03T16:28:53-04:00">Sep 3, 2026</time>
+    · <a href="https://github.com/xai-org/x-algorithm/commit/e4dcedd3b2db8b7a9cc244c2b616d04a0ee2c353"><code>e4dcedd</code></a>
+    · 1 files, +2/−0 · merge</div>
+  <h2><a href="e4dcedd.html">Community PR #88 merged: dedupe in-network IDs before visibility lookup</a></h2>
+  <div class="tags"></div>
+  <div class="summary"><p>Merge of <a href="https://github.com/xai-org/x-algorithm/pull/88">PR #88</a> from <code>joshs1017dev</code>. <code>VFCandidateHydrator</code> now sorts and dedups <code>in_network_ids</code> (<code>sort_unstable()</code> + <code>dedup()</code>) before calling visibility filtering, so duplicate IDs aren&#x27;t looked up twice. Two lines changed. This is the only commit in the history from an outside contributor.</p></div>
+  <p class="more"><a href="e4dcedd.html">Full analysis →</a> <span class="src">Summary: hand-written notes, checked against the diff</span></p>
+</article>
+<h3>Automatic analysis</h3><ul><li>Most activity in <code>home-mixer/</code> (+2/−0).</li></ul>
+<h3>Config parameters (<code>param!</code> defaults)</h3><p class='muted'>None.</p>
+<h3>Pipeline components</h3><div class="tw"><table class=""><thead><tr><th>Kind</th><th>Change</th><th>File</th></tr></thead><tbody><tr><td>Candidate hydrator</td><td>modified</td><td><a href="https://github.com/xai-org/x-algorithm/blob/e4dcedd3b2db8b7a9cc244c2b616d04a0ee2c353/home-mixer/candidate_hydrators/vf_candidate_hydrator.rs">home-mixer/candidate_hydrators/vf_candidate_hydrator.rs</a></td></tr></tbody></table></div>
+<h3>Modules touched</h3><div class="tw"><table class=""><thead><tr><th>Module</th><th>Files added</th><th>Modified</th><th>Removed</th><th>Lines +</th><th>Lines −</th></tr></thead><tbody><tr><td><code>home-mixer/</code></td><td>0</td><td>1</td><td>0</td><td>+2</td><td>−0</td></tr></tbody></table></div>
+<h3>Files (1)</h3><details><summary>Show file list</summary><div class="tw"><table class=""><thead><tr><th></th><th>Path</th><th>Lines</th><th>Note</th></tr></thead><tbody><tr><td>M</td><td><a href="https://github.com/xai-org/x-algorithm/blob/e4dcedd3b2db8b7a9cc244c2b616d04a0ee2c353/home-mixer/candidate_hydrators/vf_candidate_hydrator.rs">home-mixer/candidate_hydrators/vf_candidate_hydrator.rs</a></td><td>+2/−0</td><td></td></tr></tbody></table></div></details>
+<h3>Upstream commit message</h3><pre>Merge pull request #88 from joshs1017dev/dedup-in-network-vf-ids
+
+Deduplicate in_network_ids before VF lookup</pre>
+<nav class="pn"><a href="85ac72a.html">← older (Sep 2, 2026)</a><a href="9b0dc31.html">newer (Sep 4, 2026) →</a></nav>
+</main>
+<footer>
+  <p>Unofficial, community-maintained project. Not affiliated with, endorsed by, or operated by X Corp. or xAI. Notes are generated from the public git history of <a href="https://github.com/xai-org/x-algorithm">xai-org/x-algorithm</a> and may contain mistakes; the upstream diff is the source of truth.</p>
+  <p>Generated 2026-10-09 22:44 UTC from upstream <a href="https://github.com/xai-org/x-algorithm/commit/cb45b5501423126adfc508052116c2d67c0e3fec"><code>cb45b55</code></a>.
+  Source for this site: <a href="https://github.com/fitzyracing1/x-algorithm-changelog">fitzyracing1/x-algorithm-changelog</a>.</p>
+</footer>
+</body>
+</html>
