@@ -3,6 +3,9 @@
 # Optional: add an XAI_API_KEY (or OPENAI_API_KEY) repository secret to enable LLM-written
 # summaries for commits that have no hand-written note in notes/. Without a key the
 # deterministic analysis is used.
+# Optional X bot (see README "Bot"): posts only when the repo variable BOT_POSTING_ENABLED is
+# 'true' AND the X_API_KEY / X_API_SECRET / X_ACCESS_TOKEN / X_ACCESS_TOKEN_SECRET secrets exist.
+# Otherwise the "post" job is a dry run that prints what it would post and never fails the run.
 name: Build & deploy changelog
 
 on:
@@ -53,6 +56,13 @@ jobs:
             git push
           fi
 
+      - name: Keep entries.json for the bot job
+        uses: actions/upload-artifact@v4
+        with:
+          name: entries
+          path: site/entries.json
+          retention-days: 7
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
@@ -68,3 +78,50 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  post:
+    # Runs only after a successful build AND deploy, so every link in a post already resolves.
+    needs: [build, deploy]
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # commit data/posted.json back
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: entries
+          path: ${{ runner.temp }}/entries
+
+      - name: Bot unit tests (a failure blocks posting, never the site deploy)
+        run: python -m unittest discover -s tests
+
+      - name: Post new meaningful sync to X (dry run unless enabled)
+        id: bot
+        env:
+          BOT_POSTING_ENABLED: ${{ vars.BOT_POSTING_ENABLED }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+        run: python -m xchangelog.bot --entries "${{ runner.temp }}/entries/entries.json" --state data/posted.json
+
+      - name: Commit bot state
+        if: always() && steps.bot.outcome != 'skipped'
+        run: |
+          if [ -n "$(git status --porcelain data/posted.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/posted.json
+            git commit -m "Bot: update posted state [skip ci]"
+            git pull --rebase origin "${{ github.event.repository.default_branch }}"
+            git push origin HEAD:"${{ github.event.repository.default_branch }}"
+          fi

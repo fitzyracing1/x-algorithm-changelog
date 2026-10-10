@@ -97,8 +97,69 @@ Notes override the automatic summary, but the entry page always shows the full a
 3. Validates the output with `scripts/validate.py`.
 4. Commits any newly cached LLM summaries in `data/llm/` back to the repo (only when a key secret is set).
 5. Uploads `site/` and deploys it with `actions/deploy-pages`.
+6. After a successful deploy, the `post` job runs the bot's unit tests and then the X bot (see [Bot](#bot)). Without the bot secrets and variable it is a dry run that only prints what it would post.
 
 One-time setup after pushing: **Settings → Pages → Source: GitHub Actions**. Optionally add an `XAI_API_KEY` repository secret.
+
+## Bot
+
+An optional X bot posts a short note when a **new** upstream sync contains a meaningful change. The code is in `xchangelog/bot.py` (stdlib only, including OAuth 1.0a signing for `POST /2/tweets`), and the tests are in `tests/test_bot.py`.
+
+**What counts as meaningful.** All of these come from the deterministic analysis:
+
+- A ranking weight default changing, being added with a non-zero value, or being removed.
+- Any other `param!` default changing (old → new).
+- A feature flag flipping, or a new flag that is ON by default.
+- A candidate source, filter or scorer being added or removed in the feed-serving code (`home-mixer/`, `thunder/`, `vm-ranker/`, `xai-value-model/`, `candidate-pipeline/`).
+- A threshold constant moving by 20% or more.
+
+Sync noise, formatting, comment-only changes, model-file (Git LFS) churn, string-only experiment IDs and timestamp-only commits never post.
+
+**Format.** The first line is `X algorithm update (Oct 7): <most important change, exact old → new, % or ×>`. It's followed by up to 3 more changes, a link to the entry page here, a link to the upstream commit, and an "Unofficial; repo defaults" note. Each post is at most 280 weighted characters (URLs count as 23, `→` counts as 2), and a thread is at most 4 posts. There are no hashtags and no @mentions.
+
+**Accuracy gates.**
+
+- Text is built only from the analysis. A hand-written note title is used as the headline only when every number in it matches the analysis.
+- LLM text is never used.
+- A final check rejects any post containing a number that is not an analysed value or a value computed from one (percentage, ratio, duration).
+- The bot skips the entry instead of guessing on any of these: mirrored params that changed differently, non-literal numeric defaults, bulk releases (>50 new params), the initial import, or a post that doesn't fit.
+
+**State and limits.**
+
+- `data/posted.json` records every handled upstream SHA (`baseline`, `posted`, `not_meaningful`, `skipped`, `failed`, `partial`, `uncertain`), so nothing posts twice.
+- The first live run marks every existing entry as handled and posts nothing (no backfill). Posting starts with the next meaningful sync.
+- At most 1 thread per run and 3 per UTC day. Entries older than 3 days are skipped.
+- A post the API definitely rejected is retried once on the next run.
+- A post whose outcome is unknown (for example a timeout) is never retried. Check the account by hand.
+
+**Kill switch.** Posting happens only when the repo variable `BOT_POSTING_ENABLED` is exactly `true` **and** all four secrets are set. Anything else is a dry run. Set the variable to `false` to stop immediately.
+
+### Setup (in this order)
+
+1. **Create the bot's X account.** Use a dedicated handle and an email you control. Add a profile bio that says it's an unofficial, automated tracker and links to this site.
+2. **Label it as automated.** Log in as the bot and go to **Settings and privacy → Your account → Account information → Automation**. Choose **Managing account** and pick your personal account, then confirm with that account's password. The bot profile then shows "Automated by @you".
+3. **Create the developer app.** Log in to [developer.x.com](https://developer.x.com) **as the bot account**, so the access token belongs to the bot. Then:
+   - Create a Project and an App.
+   - Under **App settings → User authentication settings → Set up**, choose:
+     - App permissions: **Read and write**.
+     - Type of app: **Web App, Automated App or Bot**.
+     - Callback URL and Website URL: `https://fitzyracing1.github.io/x-algorithm-changelog/`.
+   - Save.
+   - Check that the current API access tier allows `POST /2/tweets` at about 1–3 threads a day.
+4. **Generate the keys.** In **Keys and tokens**:
+   - Copy the **API Key and Secret** (consumer keys).
+   - **Generate** the **Access Token and Secret**. Do this after setting Read and write. The portal must say the token was created with *Read and Write* permissions; if it says *Read*, regenerate it.
+5. **Add the four repository secrets.** On GitHub, open **Settings → Secrets and variables → Actions → Secrets → New repository secret** and add `X_API_KEY`, `X_API_SECRET`, `X_ACCESS_TOKEN` and `X_ACCESS_TOKEN_SECRET`.
+6. **Check a dry run.** Run the workflow by hand (**Actions → Build & deploy changelog → Run workflow**). The `post` job log should say `DRY RUN (BOT_POSTING_ENABLED is not 'true')`.
+7. **Enable posting.** Under **Settings → Secrets and variables → Actions → Variables → New repository variable**, add `BOT_POSTING_ENABLED` = `true`. Then run the workflow once more. That first live run only marks existing entries as handled; the first real post comes with the next meaningful upstream sync.
+
+Local checks (no network, nothing posted):
+
+```bash
+python -m unittest discover -s tests -v
+python -m xchangelog.bot --preview a707cc2 77d431a 78460ca 35650fb   # what past syncs would have looked like
+python -m xchangelog.bot --dry-run                                  # what the next run would post
+```
 
 ## Layout
 
@@ -109,8 +170,11 @@ xchangelog/
   summarize.py  deterministic plain-English summary, notes loader, optional LLM call
   render.py     HTML pages + Atom feed (no template engine, no JS)
   cli.py        orchestration; `python -m xchangelog`
+  bot.py        optional X bot; `python -m xchangelog.bot` (dry run unless enabled)
+tests/          unit tests for the bot
 notes/          hand-written notes, one file per upstream commit
 data/llm/       cached LLM summaries (empty until a key is configured)
+data/posted.json  bot state: upstream SHAs already handled
 static/style.css
 scripts/validate.py
 .github/workflows/pages.yml

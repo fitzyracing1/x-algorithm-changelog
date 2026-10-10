@@ -138,7 +138,7 @@ def main(argv: list[str] | None = None) -> int:
         render.write(os.path.join(out, "entries", f"{e['short']}.html"),
                      render.page(title + " · x-algorithm changelog", render.entry_detail(e, cfg, prev, nxt), cfg, depth=1, description=title))
     render.write(os.path.join(out, "feed.xml"), render.atom_feed(newest_first, cfg))
-    slim = [{k: e[k] for k in ("sha", "short", "url", "date", "class", "stats", "summary", "params", "components", "constants")} for e in newest_first]
+    slim = [{k: e[k] for k in ("sha", "short", "url", "date", "class", "is_root", "stats", "summary", "params", "components", "constants")} for e in newest_first]
     render.write(os.path.join(out, "entries.json"), json.dumps({"generated": cfg["generated_iso"], "upstream_head": head, "entries": slim}, indent=1))
     render.write(os.path.join(out, ".nojekyll"), "")
     print(f"[done] {len(real)} entries ({len(noops)} no-op collapsed), {len(history)} param changes -> {out}", file=sys.stderr)

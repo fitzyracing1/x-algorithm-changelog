@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-09T22:44:16Z",
+ "generated": "2026-10-10T00:27:19Z",
  "upstream_head": "cb45b5501423126adfc508052116c2d67c0e3fec",
  "entries": [
   {
@@ -8,6 +8,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/cb45b5501423126adfc508052116c2d67c0e3fec",
    "date": "2026-10-09T05:42:57Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 16,
     "added_files": 1,
@@ -73,6 +74,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/35650fb89f3b14dc6234312535f642779d891d88",
    "date": "2026-10-08T05:09:20Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 173,
     "added_files": 33,
@@ -539,6 +541,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/78460ca8b65c57ddd3a05f9217c8aaeba214b628",
    "date": "2026-10-07T03:05:56Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 22,
     "added_files": 1,
@@ -620,6 +623,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/e62790c99484b51424c2eccc488ed4e7517e8778",
    "date": "2026-10-06T04:59:30Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 103,
     "added_files": 11,
@@ -953,6 +957,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/b412112d03f27acbfd668e0cc040abcafa1080c1",
    "date": "2026-10-03T03:26:56Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 148,
     "added_files": 29,
@@ -1307,6 +1312,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/76843a5eea278ced444b21372d4e6d6909f5c35e",
    "date": "2026-10-02T02:06:55Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 105,
     "added_files": 16,
@@ -1486,6 +1492,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/b79b947ce9283c786822274ef8fe208c33c585b2",
    "date": "2026-10-01T02:13:55Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 47,
     "added_files": 4,
@@ -1584,6 +1591,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/77d431aabf409ca1c1eed9bec7e2183f7c914e23",
    "date": "2026-09-30T03:53:42Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 69,
     "added_files": 3,
@@ -1752,6 +1760,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/a707cc27ba36d3fa79450c9cffcc48a82d080b02",
    "date": "2026-09-29T03:06:30Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 89,
     "added_files": 18,
@@ -2063,6 +2072,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/4c5cfe8f07f1c76d4f04277e803f20e6039f5191",
    "date": "2026-09-26T03:39:02Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 80,
     "added_files": 6,
@@ -2251,6 +2261,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/bf7db1becb6590152fba79b8c3bf0555752f7b14",
    "date": "2026-09-25T01:56:24Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 87,
     "added_files": 31,
@@ -2447,6 +2458,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/44d37ebf87f2185b949cd37b710d410c2a77d21f",
    "date": "2026-09-24T01:53:14Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 63,
     "added_files": 8,
@@ -2823,6 +2835,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/1b3fec20bc3fd9879bc3e9f3d9c42753cdc3fede",
    "date": "2026-09-23T02:19:21Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 92,
     "added_files": 10,
@@ -3482,6 +3495,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/3aa0fa336c4a20e4149b6151629b6050897bb8a5",
    "date": "2026-09-22T04:11:08Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 72,
     "added_files": 6,
@@ -3879,6 +3893,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/8b25829717a4f104dd04403ee7d0253c5fedb1b7",
    "date": "2026-09-18T23:55:39Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 41,
     "added_files": 2,
@@ -4208,6 +4223,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/c279172eb8a992170f077d4c1d441923ef215d2e",
    "date": "2026-09-18T01:07:14Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 30,
     "added_files": 6,
@@ -4282,6 +4298,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/42266f3e2be54d8a3c4d2228aac2e8f8d1c1f034",
    "date": "2026-09-17T05:09:29Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 64,
     "added_files": 10,
@@ -4448,6 +4465,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/fad2f71edc780ab14e4cfaebbb8b221385782e43",
    "date": "2026-09-16T01:11:22Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 26,
     "added_files": 0,
@@ -4541,6 +4559,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/2d4a03c2dbfb1214571d8098077c53f4ee8a9dc1",
    "date": "2026-09-15T01:07:17Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 17,
     "added_files": 4,
@@ -4688,6 +4707,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/6bb4594253cdfa9ea19983a54a401d5ce8f8275d",
    "date": "2026-09-12T02:18:08Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 24,
     "added_files": 0,
@@ -4840,6 +4860,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/fee1d0f3e99c25e4c10499e1aba4061c8d1cc86d",
    "date": "2026-09-10T21:39:14Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 33,
     "added_files": 2,
@@ -5002,6 +5023,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/75d93d9b6c7d08124173c513a727c37460ed5b04",
    "date": "2026-09-09T20:46:07Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 28,
     "added_files": 0,
@@ -5088,6 +5110,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/49815da255010f2468fb87b8bdd1283c2a507ca8",
    "date": "2026-09-08T19:23:54Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 78,
     "added_files": 20,
@@ -5386,6 +5409,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/902a06fd616ed815f660e5546d16d492fa1ca825",
    "date": "2026-09-04T21:03:46Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 25,
     "added_files": 0,
@@ -5521,6 +5545,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/9b0dc319691b76088266d0d2b48faf22d2b8a82a",
    "date": "2026-09-04T00:37:40Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 73,
     "added_files": 4,
@@ -5691,6 +5716,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/e4dcedd3b2db8b7a9cc244c2b616d04a0ee2c353",
    "date": "2026-09-03T16:28:53-04:00",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 1,
     "added_files": 0,
@@ -5740,6 +5766,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/85ac72a1bba41f21615e3f0bca56da75970a6633",
    "date": "2026-09-02T19:46:48Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 34,
     "added_files": 3,
@@ -5861,6 +5888,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/7ba776848b12d8422eb0f291ee03ea5c17ab0188",
    "date": "2026-09-01T20:47:22Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 34,
     "added_files": 6,
@@ -5918,6 +5946,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/6384ca7d2c8570fbc645c20c3291730739ac00ce",
    "date": "2026-09-01T00:11:04Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 70,
     "added_files": 7,
@@ -6138,6 +6167,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/bc8e5f0f07b31337bfdcaf690121498e00199b64",
    "date": "2026-08-28T22:37:32Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 24,
     "added_files": 3,
@@ -6210,6 +6240,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/24c60942c5c5fdad3a6addffb4c6e6d2f228f04f",
    "date": "2026-08-28T01:00:41Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 41,
     "added_files": 4,
@@ -6391,6 +6422,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/45b48ba6baa40e212f6dcbaf8fe9fdc8d9da722e",
    "date": "2026-08-26T20:04:12Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 36,
     "added_files": 0,
@@ -6481,6 +6513,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/0d3cdd806c405f04db7030f720b48687aa304061",
    "date": "2026-08-25T23:20:04Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 47,
     "added_files": 2,
@@ -6842,6 +6875,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/d011592a1c8c4bfb23781ff15577a68dc08bdde1",
    "date": "2026-08-24T18:51:34Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 19,
     "added_files": 1,
@@ -6934,6 +6968,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/28e414f535e4b5a50ca12ee87674e7649e50c7ad",
    "date": "2026-08-21T19:10:38Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 35,
     "added_files": 4,
@@ -7034,6 +7069,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/d0cef2f943084ee0d4310378031c9c2c37d67f12",
    "date": "2026-08-20T20:22:58Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 14,
     "added_files": 1,
@@ -7123,6 +7159,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/aad7179773944e17eb8798bbbf0231d6cd6c1ffc",
    "date": "2026-08-19T21:25:42Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 79,
     "added_files": 6,
@@ -7290,6 +7327,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/11a71f87d6a7fc4c1e8159dad8f3c5ff90a0f7ed",
    "date": "2026-08-18T18:57:00Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 14,
     "added_files": 1,
@@ -7396,6 +7434,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/b089ce64891f9c50fab73aa00dbe65acb82f198f",
    "date": "2026-08-17T20:20:07Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 34,
     "added_files": 1,
@@ -7525,6 +7564,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/c65aa179db7bdd61e2c2821eac87f208a105c053",
    "date": "2026-08-14T20:55:37Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 21,
     "added_files": 1,
@@ -7657,6 +7697,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/a389166f6cf5da70a286b568c87695d4dcdce3a1",
    "date": "2026-08-13T17:23:56Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 1,
     "added_files": 0,
@@ -7700,6 +7741,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/47c1bcdadfe4911568fd6db4f8838b194325beab",
    "date": "2026-08-13T17:09:58Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 2053,
     "added_files": 1860,
@@ -10641,6 +10683,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/0bfc2795d308f90032544322747caacd535f75ae",
    "date": "2026-05-15T21:54:59Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 1,
     "added_files": 0,
@@ -10687,6 +10730,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/e414c171ed68266341193330bc4864bf3f3534e3",
    "date": "2026-05-15T07:28:04Z",
    "class": "code",
+   "is_root": false,
    "stats": {
     "files": 187,
     "added_files": 137,
@@ -11232,6 +11276,7 @@
    "url": "https://github.com/xai-org/x-algorithm/commit/aaa167b3de8a674587c53545a43c90eaad360010",
    "date": "2026-01-20T02:31:49Z",
    "class": "code",
+   "is_root": true,
    "stats": {
     "files": 79,
     "added_files": 79,
