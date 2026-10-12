@@ -191,3 +191,8 @@ scripts/validate.py
 ## License
 
 MIT for this project's code and notes. Upstream code is © X Corp./xAI under its own license (Apache-2.0).
+
+## Documentation
+
+- In-repo docs: [docs/](docs/index.md)
+- Wiki: [https://github.com/fitzyracing1/x-algorithm-changelog/wiki](https://github.com/fitzyracing1/x-algorithm-changelog/wiki)
